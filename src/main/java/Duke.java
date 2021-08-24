@@ -9,67 +9,82 @@ public class Duke {
                 + "     | |_| | |_| |   <  __/\n"
                 + "     |____/ \\__,_|_|\\_\\___|\n";
         System.out.println("     Hello from\n" + logo);
-        String horizontal = "    ____________________________________________________________";
-        System.out.println(horizontal);
-        System.out.println("     Hello! I'm Duke\n" + "     What can I do for you?");
-        System.out.println(horizontal);
+        String horizontalLine = "    ____________________________________________________________";
+        System.out.println(horizontalLine + "\n" + "     Hello! I'm Duke\n" + "     What can I do for you?\n" + horizontalLine);
         String userInput;
         Scanner in = new Scanner(System.in);
-        boolean userExit = false;
-        ArrayList<Task> list = new ArrayList<>();
+        boolean userExited = false;
+        ArrayList<Task> tasks = new ArrayList<>();
         
-        while (!userExit){
-
+        while (!userExited){
             System.out.println("");
             userInput = in.nextLine();
 
-            if (userInput.equals("bye")){
-                System.out.println(horizontal);
-                System.out.println("     Bye. Hope to see you again soon!");  
-                System.out.println(horizontal);
-                userExit = true;  
+            if (userInput.equals("bye")) {   
 
-            } else if (userInput.equals("list")){
-                System.out.println(horizontal);
+                System.out.println(horizontalLine);
+                exit();
+                System.out.println(horizontalLine);
+                userExited = true; 
 
-                if(list.size() == 0){
-                    System.out.println("     No tasks added.");
-                }
-                for (int x = 0; x < list.size(); x += 1){
-                    System.out.println("     "+ (x+1) + "." + "[" 
-                                        + list.get(x).getStatusIcon() + "] " 
-                                        + list.get(x).description);
-                    
-                }
-                System.out.println(horizontal);
-            }
+            } else if (userInput.equals("list")) {
 
-            else if (userInput.length() > 3 && userInput.substring(0, 4).equals("done")){
+                System.out.println(horizontalLine);
+                listOfTasks(tasks);
+                System.out.println(horizontalLine);
 
-                String digit = userInput.substring(4, userInput.length()).trim();
-                int taskNumber = Integer.parseInt(digit) - 1;
-                System.out.println(horizontal);
-                if (list.get(taskNumber).isDone){
-                    System.out.println("     Task is already marked as done.");
-                } else{
-                    list.get(taskNumber).markAsDone();
-                    System.out.println("     Nice! I've marked this task as done:");
-                    System.out.println("       [" + list.get(taskNumber).getStatusIcon() + "] " 
-                                        + list.get(taskNumber).description);
-                }
+            } else if (userInput.length() > 3 && userInput.substring(0, 4).equals("done")) {
 
-                System.out.println(horizontal);
-
+                System.out.println(horizontalLine);
+                markedAsDone(tasks, userInput);
+                System.out.println(horizontalLine);
 
             } else {
-                System.out.println(horizontal);
-                System.out.println("     added: " + userInput);
-                list.add(new Task(userInput));
-                System.out.println(horizontal);
+
+                System.out.println(horizontalLine);
+                addToList(tasks, userInput);
+                System.out.println(horizontalLine);
+
             }    
         }
 
-        in.close();
     }
+
+    public static void listOfTasks(ArrayList<Task> tasks) {
+        if(tasks.size() == 0){
+            System.out.println("     No tasks added.");
+        }
+        for (int x = 0; x < tasks.size(); x += 1) {
+            System.out.println("     " + (x + 1) + "." + "[" + tasks.get(x).getStatusIcon() + "] " + tasks.get(x).description);  
+        }
+
+    }
+
+    public static void exit() {
+        System.out.println("     Bye. Hope to see you again soon!");  
+    }
+
+    public static void markedAsDone(ArrayList<Task> tasks, String userInput) {
+        String digit = userInput.substring(4, userInput.length()).trim();
+        int taskNumber = Integer.parseInt(digit) - 1;
+
+        if (tasks.get(taskNumber).isDone){
+            System.out.println("     Task is already marked as done.");
+        } else {
+            tasks.get(taskNumber).markAsDone();
+            System.out.println("     Nice! I've marked this task as done:");
+            System.out.println("       [" + tasks.get(taskNumber).getStatusIcon() + "] " + tasks.get(taskNumber).description);
+        }
+    }
+
+    public static void addToList(ArrayList<Task> tasks, String userInput){
+        if (userInput.length() > 0){  
+            System.out.println("     added: " + userInput);
+            tasks.add(new Task(userInput));
+        } else {
+            System.out.println("     Please type in a task.");
+        }
+    }
+    
 }
 
