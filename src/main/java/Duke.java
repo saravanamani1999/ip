@@ -54,8 +54,8 @@ public class Duke {
         if(tasks.size() == 0){
             System.out.println("     No tasks added.");
         }
-        for (int x = 0; x < tasks.size(); x += 1) {
-            System.out.println("     " + (x + 1) + "." + "[" + tasks.get(x).getStatusIcon() + "] " + tasks.get(x).description);  
+        for (int i = 0; i < tasks.size(); i += 1) {
+            System.out.println("     " + (i + 1) + "." + "[" + tasks.get(i).getStatusIcon() + "] " + tasks.get(i).description);  
         }
 
     }
@@ -85,6 +85,6 @@ public class Duke {
             System.out.println("     Please type in a task.");
         }
     }
-    
+
 }
 
