@@ -12,10 +12,15 @@ public class Duke {
         String horizontal = "    ____________________________________________________________";
         System.out.println(horizontal);
         System.out.println("     Hello! I'm Duke\n" + "     What can I do for you?");
+        
         System.out.println(horizontal);
         String userInput;
+        String[] list = new String[100];
+        int listCount = 0;
         Scanner in = new Scanner(System.in);
         boolean userExit = false;
+        
+        
         
         while (!userExit){
 
@@ -28,14 +33,30 @@ public class Duke {
                 System.out.println(horizontal);
                 userExit = true;  
 
+            } else if (userInput.equals("list")){
+                System.out.println(horizontal);
+
+                if(list[0] == null){
+                    System.out.println("     No tasks added.");
+                }
+                for (int x = 0; x < list.length; x += 1){
+                    if(list[x] != null){
+                        System.out.println("     "+ (x+1) + ". " + list[x]);
+                    }
+                }
+                System.out.println(horizontal);
+
             } else {
                 System.out.println(horizontal);
-                System.out.println("     " + userInput);
+                System.out.println("     added: " + userInput);
+                list[listCount] = userInput;
+                listCount += 1;
                 System.out.println(horizontal);
             }
             
             
         }
+
         in.close();
    
     }
