@@ -1,5 +1,5 @@
 import java.util.Scanner;
-import java.util.ArrayList;
+
 
 public class Duke {
     public static void main(String[] args) {
@@ -16,7 +16,6 @@ public class Duke {
         String userInput;
         Scanner in = new Scanner(System.in);
         boolean userExit = false;
-        ArrayList<Task> list = new ArrayList<>();
         
         while (!userExit){
 
@@ -32,7 +31,6 @@ public class Duke {
             } else {
                 System.out.println(horizontal);
                 System.out.println("     " + userInput);
-                list.add(new Task(userInput));
                 System.out.println(horizontal);
             }
             
