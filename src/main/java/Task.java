@@ -35,7 +35,16 @@ public class Task {
         return horizontalLine + indent + "added: " + description + System.lineSeparator() + horizontalLine;
     }
 
+    public String toStringStart() {
+        return horizontalLine +  indent + "Got it. I've added this task:\n" + indent;
+    }
+
+    public String toStringEnd() {
+        return indent + "Now you have " + taskCount + " tasks in the list.\n" + horizontalLine;
+    }
+
+
     public String printDone() {
-        return horizontalLine + indent + "Nice! I've marked this task as done:\n" + "       [" + getStatusIcon() + "] " + description + System.lineSeparator() + horizontalLine;
+        return horizontalLine + indent + "Nice! I've marked this task as done:\n     [" + getTaskType() + "][" + getStatusIcon() + "] " + description + System.lineSeparator() + horizontalLine;
     }
 }

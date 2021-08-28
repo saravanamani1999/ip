@@ -5,7 +5,7 @@ public class Duke {
     private static final String horizontalLine = "    ____________________________________________________________";
     private static int taskCount = 0;
     private static boolean hasUserExited = false;
-    private static String indent = "     ";
+    private static final String indent = "     ";
 
     public static void addTask(Task t) {
         tasks[taskCount] = t;
@@ -44,7 +44,6 @@ public class Duke {
         Scanner in = new Scanner(System.in);
 
         while (!hasUserExited) {
-            System.out.print("\n");
             getUserInput = in.nextLine();
             if (getUserInput.equals("bye")) {
                 exit();
@@ -58,7 +57,15 @@ public class Duke {
                 listOfTasks();
             } else if (getUserInput.contains("todo")) {
                 addTask(new ToDo(getUserInput.substring(4).trim(), taskCount));
-            } else {
+            } else if(getUserInput.contains("deadline")) {
+                int by = getUserInput.indexOf("/");
+                addTask(new Deadline(getUserInput.substring(9, by - 1), getUserInput.substring(by + 4).trim(), taskCount));
+
+            } else if(getUserInput.contains("event")) {
+                int at = getUserInput.indexOf("/");
+                addTask(new Event(getUserInput.substring(6, at - 1), getUserInput.substring(at + 4).trim(), taskCount));
+            }
+            else {
                 addTask(new Task(getUserInput, taskCount));
             }
         }

@@ -8,6 +8,6 @@ public class ToDo extends Task{
     }
 
     public String toPrint() {
-        return super.horizontalLine +  super.indent + "Got it. I've added this task:\n" + super.indent + "  [T][" + getStatusIcon() + "] " + description + super.horizontalLine;
+        return super.toStringStart() + "  [T][" + getStatusIcon() + "] " + description + "\n" + super.toStringEnd();
     }
 }
