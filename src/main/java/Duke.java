@@ -1,9 +1,8 @@
 import java.util.Scanner;
-import java.util.ArrayList;
 
 public class Duke {
-    private static Task[] tasks = new Task[100];
-    private static String horizontalLine = "    ____________________________________________________________";
+    private static final Task[] tasks = new Task[100];
+    private static final String horizontalLine = "    ____________________________________________________________";
     private static int taskCount = 0;
     private static boolean hasUserExited = false;
 
@@ -15,6 +14,9 @@ public class Duke {
 
     public static void listOfTasks() {
         System.out.println(horizontalLine);
+        if(taskCount == 0) {
+            System.out.println("     You have no tasks!");
+        }
         for (Task t : tasks) {
             if (t != null) {
                 System.out.println(t.list());
@@ -41,12 +43,12 @@ public class Duke {
         Scanner in = new Scanner(System.in);
 
         while (!hasUserExited) {
-            System.out.println("");
+            System.out.print("\n");
             getUserInput = in.nextLine();
             if (getUserInput.equals("bye")) {
                 exit();
-            } else if (getUserInput.length() > 3 && getUserInput.substring(0, 4).equals("done")) {
-                int taskNumber = Integer.parseInt(getUserInput.substring(4, getUserInput.length()).trim()) - 1;
+            } else if (getUserInput.contains("done")) {
+                int taskNumber = Integer.parseInt(getUserInput.substring(4).trim()) - 1;
                 tasks[taskNumber].markAsDone();
                 System.out.println(tasks[taskNumber].printDone());
             } else if (getUserInput.equals("list")) {
