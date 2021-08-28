@@ -28,7 +28,6 @@ public class Duke {
         hasUserExited = true;
     }
 
-
     public static void main(String[] args) {
         String logo = "      ____        _        \n"
                 + "     |  _ \\ _   _| | _____ \n"
