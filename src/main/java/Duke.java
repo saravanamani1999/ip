@@ -5,6 +5,7 @@ public class Duke {
     private static final String horizontalLine = "    ____________________________________________________________";
     private static int taskCount = 0;
     private static boolean hasUserExited = false;
+    private static String indent = "     ";
 
     public static void addTask(Task t) {
         tasks[taskCount] = t;
@@ -47,12 +48,16 @@ public class Duke {
             getUserInput = in.nextLine();
             if (getUserInput.equals("bye")) {
                 exit();
+            } else if (getUserInput.isEmpty()) {
+                System.out.println(horizontalLine + indent + "\n Please input a task!\n" + horizontalLine);
             } else if (getUserInput.contains("done")) {
                 int taskNumber = Integer.parseInt(getUserInput.substring(4).trim()) - 1;
                 tasks[taskNumber].markAsDone();
                 System.out.println(tasks[taskNumber].printDone());
             } else if (getUserInput.equals("list")) {
-                    listOfTasks();
+                listOfTasks();
+            } else if (getUserInput.contains("todo")) {
+                addTask(new ToDo(getUserInput.substring(4).trim(), taskCount));
             } else {
                 addTask(new Task(getUserInput, taskCount));
             }
