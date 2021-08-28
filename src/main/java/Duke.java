@@ -41,7 +41,6 @@ public class Duke {
         String getUserInput;
         Scanner in = new Scanner(System.in);
 
-
         while (!hasUserExited) {
             System.out.println("");
             getUserInput = in.nextLine();
