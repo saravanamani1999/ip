@@ -14,7 +14,7 @@ public class Duke {
     }
 
     public static void listTasks() {
-        System.out.print(horizontalLine);
+        System.out.print(horizontalLine + "     Here are the tasks in your list:\n");
         if(taskCount == 0) {
             System.out.println("     You have no tasks!");
         }

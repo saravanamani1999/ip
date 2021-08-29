@@ -15,7 +15,7 @@ public class Deadline extends Task {
     }
 
     public String list() {
-        return "     Here are the tasks in your list:\n" + "     " + taskCount + "." + "[" + getTaskType() + "]" + "[" + getStatusIcon() + "] " + description + " (by: " + by + ")";
+        return "     " + taskCount + "." + "[" + getTaskType() + "]" + "[" + getStatusIcon() + "] " + description + " (by: " + by + ")";
     }
 
     public String printDone() {

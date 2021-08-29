@@ -15,7 +15,7 @@ public class Event extends Task {
     }
 
     public String list() {
-        return "     Here are the tasks in your list:\n" +  "     " + taskCount + "." + "[" + getTaskType() + "]" + "[" + getStatusIcon() + "] " + description + " (at: " + at + ")";
+        return "     " + taskCount + "." + "[" + getTaskType() + "]" + "[" + getStatusIcon() + "] " + description + " (at: " + at + ")";
     }
 
     public String printDone() {

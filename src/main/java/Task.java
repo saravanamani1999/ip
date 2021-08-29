@@ -28,7 +28,7 @@ public class Task {
     }
 
     public String list() {
-        return "     Here are the tasks in your list:\n" + "     " + taskCount + "." + "[" + getTaskType() + "]" + "[" + getStatusIcon() + "] " + description;
+        return "     " + taskCount + "." + "[" + getTaskType() + "]" + "[" + getStatusIcon() + "] " + description;
     }
 
     public String printOk() {
