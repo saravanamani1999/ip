@@ -23,7 +23,7 @@ public class Task {
         return isDone;
     }
 
-    public String getTaskType(){
+    public String getTaskType() {
         return " ";
     }
 

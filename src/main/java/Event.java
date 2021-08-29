@@ -5,8 +5,7 @@ public class Event extends Task {
         super(description, taskCount);
         this.at = at;
     }
-
-    public String getTaskType(){
+    public String getTaskType() {
         return "E";
     }
 

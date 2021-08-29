@@ -4,7 +4,7 @@ public class ToDo extends Task{
         super(description, taskCount);
     }
 
-    public String getTaskType(){
+    public String getTaskType() {
         return "T";
     }
 

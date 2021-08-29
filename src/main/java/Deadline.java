@@ -6,7 +6,7 @@ public class Deadline extends Task {
         this.by = by;
     }
 
-    public String getTaskType(){
+    public String getTaskType() {
         return "D";
     }
 
