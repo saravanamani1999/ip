@@ -32,14 +32,14 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        String logo = "      ____        _        \n"
-                + "     |  _ \\ _   _| | _____ \n"
-                + "     | | | | | | | |/ / _ \\\n"
-                + "     | |_| | |_| |   <  __/\n"
-                + "     |____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("     Hello from\n" + logo);
-        System.out.println(horizontalLine + "\n" + "     Hello! I'm Duke\n"
-                + "     What can I do for you?\n" + horizontalLine);
+        String logo = "     DDDDD           kk\n"
+                + "     DD  DD  uu   uu kk  kk   eee\n"
+                + "     DD   DD uu   uu kkkkk  ee   e\n"
+                + "     DD   DD uu   uu kk kk  eeeee\n"
+                + "     DDDDDD   uuuu u kk  kk  eeeee\n";
+        System.out.println("     Hello from\n\n" + logo);
+        System.out.println(horizontalLine + "\n" + "     Hello! I'm Duke, your friendly neighbourhood task manager!\n"
+                + "     How can I help you?\n" + horizontalLine);
         String getUserInput;
         Scanner in = new Scanner(System.in);
 

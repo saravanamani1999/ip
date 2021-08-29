@@ -11,6 +11,10 @@ public class Deadline extends Task {
     }
 
     public String toPrint() {
-        return super.toStringStart() + "  [D][] " + description + " (by: " + by + ")\n"  + super.toStringEnd();
+        return super.toStringStart() + "  [D][" + getStatusIcon() + "] " + description + " (by: " + by + ")\n"  + super.toStringEnd();
+    }
+
+    public String list() {
+        return "     " + taskCount + "." + "[" + getTaskType() + "]" + "[" + getStatusIcon() + "] " + description + " (by: " + by + ")";
     }
 }

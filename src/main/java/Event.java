@@ -14,4 +14,7 @@ public class Event extends Task {
          return super.toStringStart() + "  [E][" + getStatusIcon() + "] " + description + " (at: " + at + ")\n" + super.toStringEnd();
     }
 
+    public String list() {
+        return "     " + taskCount + "." + "[" + getTaskType() + "]" + "[" + getStatusIcon() + "] " + description + " (at: " + at + ")";
+    }
 }
