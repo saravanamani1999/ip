@@ -10,11 +10,15 @@ public class Deadline extends Task {
         return "D";
     }
 
-    public String toPrint() {
-        return super.toStringStart() + "  [D][" + getStatusIcon() + "] " + description + " (by: " + by + ")\n"  + super.toStringEnd();
+    public String printOk() {
+        return super.printOkStart() + "  [D][" + getStatusIcon() + "] " + description + " (by: " + by + ")\n"  + super.printOkEnd();
     }
 
     public String list() {
-        return "     " + taskCount + "." + "[" + getTaskType() + "]" + "[" + getStatusIcon() + "] " + description + " (by: " + by + ")";
+        return "     Here are the tasks in your list:\n" + "     " + taskCount + "." + "[" + getTaskType() + "]" + "[" + getStatusIcon() + "] " + description + " (by: " + by + ")";
+    }
+
+    public String printDone() {
+        return horizontalLine + indent + "Nice! I've marked this task as done:\n     [" + getTaskType() + "][" + getStatusIcon() + "] " + description + " (by: " + by + ")" + "\n" + horizontalLine;
     }
 }

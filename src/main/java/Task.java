@@ -28,18 +28,18 @@ public class Task {
     }
 
     public String list() {
-        return "     " + taskCount + "." + "[" + getTaskType() + "]" + "[" + getStatusIcon() + "] " + description;
+        return "     Here are the tasks in your list:\n" + "     " + taskCount + "." + "[" + getTaskType() + "]" + "[" + getStatusIcon() + "] " + description;
     }
 
-    public String toPrint() {
+    public String printOk() {
         return horizontalLine + indent + "added: " + description + System.lineSeparator() + horizontalLine;
     }
 
-    public String toStringStart() {
+    public String printOkStart() {
         return horizontalLine +  indent + "Got it. I've added this task:\n" + indent;
     }
 
-    public String toStringEnd() {
+    public String printOkEnd() {
         return indent + "Now you have " + taskCount + " tasks in the list.\n" + horizontalLine;
     }
 

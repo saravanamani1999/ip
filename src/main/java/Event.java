@@ -10,11 +10,15 @@ public class Event extends Task {
         return "E";
     }
 
-    public String toPrint() {
-         return super.toStringStart() + "  [E][" + getStatusIcon() + "] " + description + " (at: " + at + ")\n" + super.toStringEnd();
+    public String printOk() {
+         return super.printOkStart() + "  [E][" + getStatusIcon() + "] " + description + " (at: " + at + ")\n" + super.printOkEnd();
     }
 
     public String list() {
-        return "     " + taskCount + "." + "[" + getTaskType() + "]" + "[" + getStatusIcon() + "] " + description + " (at: " + at + ")";
+        return "     Here are the tasks in your list:\n" +  "     " + taskCount + "." + "[" + getTaskType() + "]" + "[" + getStatusIcon() + "] " + description + " (at: " + at + ")";
+    }
+
+    public String printDone() {
+        return horizontalLine + indent + "Nice! I've marked this task as done:\n     [" + getTaskType() + "][" + getStatusIcon() + "] " + description + " (at: " + at + ")" + "\n" + horizontalLine;
     }
 }
