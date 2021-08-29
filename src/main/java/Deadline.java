@@ -1,4 +1,5 @@
 public class Deadline extends Task {
+
     protected String by;
 
     public Deadline(String description, String by, int taskCount) {
@@ -11,14 +12,17 @@ public class Deadline extends Task {
     }
 
     public String printOk() {
-        return super.printOkStart() + "  [D][" + getStatusIcon() + "] " + description + " (by: " + by + ")\n"  + super.printOkEnd();
+        return super.printOkStart() + "  [D][" + getStatusIcon() + "] "
+                + description + " (by: " + by + ")\n"  + super.printOkEnd();
     }
 
-    public String list() {
-        return "     " + taskCount + "." + "[" + getTaskType() + "]" + "[" + getStatusIcon() + "] " + description + " (by: " + by + ")";
+    public String printTask() {
+        return taskCount + "." + "[" + getTaskType() + "]" + "["
+                + getStatusIcon() + "] " + description + " (by: " + by + ")";
     }
 
     public String printDone() {
-        return horizontalLine + indent + "Nice! I've marked this task as done:\n     [" + getTaskType() + "][" + getStatusIcon() + "] " + description + " (by: " + by + ")" + "\n" + horizontalLine;
+        return horizontalLine + " Nice! I've marked this task as done:\n [" + getTaskType() + "]["
+                + getStatusIcon() + "] " + description + " (by: " + by + ")" + horizontalLine;
     }
 }

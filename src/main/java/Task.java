@@ -1,9 +1,10 @@
 public class Task {
+
     protected String description;
     protected boolean isDone;
-    protected String horizontalLine = "    ____________________________________________________________\n";
+    protected String horizontalLine = "\n____________________________________________________________\n";
     protected int taskCount;
-    protected String indent = "     ";
+    protected boolean isPlural = false;
 
     public Task(String description, int taskCount) {
         this.description = description;
@@ -27,23 +28,28 @@ public class Task {
         return " ";
     }
 
-    public String list() {
-        return "     " + taskCount + "." + "[" + getTaskType() + "]" + "[" + getStatusIcon() + "] " + description;
+    public String printTask() {
+        return taskCount + "." + "[" + getTaskType() + "]" + "["
+                + getStatusIcon() + "] " + description;
     }
 
     public String printOk() {
-        return horizontalLine + indent + "added: " + description + System.lineSeparator() + horizontalLine;
+        return horizontalLine + " added: " + description + horizontalLine;
     }
 
     public String printOkStart() {
-        return horizontalLine +  indent + "Got it. I've added this task:\n" + indent;
+        return horizontalLine + " Got it. I've added this task:\n";
     }
 
     public String printOkEnd() {
-        return indent + "Now you have " + taskCount + " tasks in the list.\n" + horizontalLine;
+        if (taskCount > 1) {
+            isPlural = true;
+        }
+        return " Now you have " + taskCount + (isPlural ? " tasks" : " task") +" in the list." + horizontalLine;
     }
 
     public String printDone() {
-        return horizontalLine + indent + "Nice! I've marked this task as done:\n     [" + getTaskType() + "][" + getStatusIcon() + "] " + description + System.lineSeparator() + horizontalLine;
+        return horizontalLine + " Nice! I've marked this task as done:\n     [" + getTaskType() + "]["
+                + getStatusIcon() + "] " + description + horizontalLine;
     }
 }

@@ -1,4 +1,4 @@
-public class ToDo extends Task{
+public class ToDo extends Task {
 
     public ToDo(String description, int taskCount) {
         super(description, taskCount);
@@ -9,10 +9,12 @@ public class ToDo extends Task{
     }
 
     public String printOk() {
-        return super.printOkStart() + "  [T][" + getStatusIcon() + "] " + description + "\n" + super.printOkEnd();
+        return super.printOkStart() + "  [T][" + getStatusIcon() + "] "
+                + description + "\n" + super.printOkEnd();
     }
 
     public String printDone() {
-        return horizontalLine + indent + "Nice! I've marked this task as done:\n     [" + getTaskType() + "][" + getStatusIcon() + "] " + description + "\n" + horizontalLine;
+        return horizontalLine + " Nice! I've marked this task as done:\n     [" + getTaskType() + "]["
+                + getStatusIcon() + "] " + description + horizontalLine;
     }
 }
