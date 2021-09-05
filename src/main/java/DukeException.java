@@ -7,7 +7,7 @@ public class DukeException extends Exception {
 
     public void sendMessage() {
         System.out.println(HORIZONTAL_LINE_TOP
-                + " ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
+                + " ☹ OOPS!!!\n"
                 + HORIZONTAL_LINE_BOTTOM);
     }
 
