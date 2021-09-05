@@ -3,9 +3,9 @@ import java.util.Scanner;
 public class Duke {
 
     private static Task[] tasks = new Task[100];
-    private static final String HORIZONTAL_LINE_TOP = "\n______________________________" +
+    public static final String HORIZONTAL_LINE_TOP = "\n______________________________" +
             "______________________________\n";
-    private static final String HORIZONTAL_LINE_BOTTOM = "_______________________________" +
+    public static final String HORIZONTAL_LINE_BOTTOM = "_______________________________" +
             "_____________________________\n";
     private static int taskCount = 0;
     private static boolean hasUserExited = false;
@@ -36,7 +36,7 @@ public class Duke {
 
     public static void getCommand(String getUserInput) throws DukeException {
         String[] description;
-        String separate[];
+        String[] separate;
         int inputSize;
         if (getUserInput.equals("bye")) {
             exit();
@@ -57,19 +57,23 @@ public class Duke {
             int by = getUserInput.indexOf("/");
             separate = getUserInput.split(" /by ");
             description = separate[0].split(" ");
+            if (by == -1 && (description[1] != null)) {
+                throw new DeadlineTimingException();
+            }
             String dueDate = separate[1].trim();
             addTask(new Deadline(description[1], dueDate, taskCount));
         } else if (getUserInput.startsWith("event")) {
             int at = getUserInput.indexOf("/");
             separate = getUserInput.split(" /at ");
             description = separate[0].split(" ");
+            if (at == -1 && (description[1] != null)) {
+                throw new EventTimingException();
+            }
             String eventTiming = separate[1].trim();
             addTask(new Event(description[1], eventTiming, taskCount));
         } else {
             throw new DukeException();
         }
-
-
     }
 
     public static void main(String[] args) {
@@ -86,7 +90,7 @@ public class Duke {
 
         while (!hasUserExited) {
             getUserInput = in.nextLine();
-            String separate[];
+            String[] separate;
             separate = getUserInput.split(" ");
             String command;
             command = separate[0];
@@ -94,16 +98,14 @@ public class Duke {
                 getCommand(getUserInput);
             } catch (IndexOutOfBoundsException e){
                 System.out.println(HORIZONTAL_LINE_TOP
-                        + "☹ OOPS!!! The description of a " + command + " cannot be empty.\n"
+                        + " ☹ OOPS!!! The description of a " + command + " cannot be empty.\n"
                         + HORIZONTAL_LINE_BOTTOM);
             } catch (NumberFormatException e) {
                 System.out.println(HORIZONTAL_LINE_TOP
-                        + "☹ OOPS!!! Please input a valid task number to mark it as done.\n"
+                        + " ☹ OOPS!!! Please input a valid task number to mark it as done.\n"
                         + HORIZONTAL_LINE_BOTTOM);
             } catch (DukeException e) {
-                System.out.println(HORIZONTAL_LINE_TOP
-                        + "☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
-                        + HORIZONTAL_LINE_BOTTOM);
+                    e.sendMessage();
             }
         }
     }
