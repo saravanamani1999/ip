@@ -2,9 +2,11 @@ import java.util.Scanner;
 
 public class Duke {
 
-    private static final Task[] tasks = new Task[100];
-    private static final String horizontalLineTop = "\n____________________________________________________________\n";
-    private static final String horizontalLineBottom = "____________________________________________________________\n";
+    private static Task[] tasks = new Task[100];
+    private static final String HORIZONTAL_LINE_TOP = "\n______________________________" +
+            "______________________________\n";
+    private static final String HORIZONTAL_LINE_BOTTOM = "_______________________________" +
+            "_____________________________\n";
     private static int taskCount = 0;
     private static boolean hasUserExited = false;
 
@@ -15,7 +17,7 @@ public class Duke {
     }
 
     public static void listTasks() {
-        System.out.print(horizontalLineTop + " Here are the tasks in your list:\n");
+        System.out.print(HORIZONTAL_LINE_TOP + " Here are the tasks in your list:\n");
         if(taskCount == 0) {
             System.out.println(" You have no tasks!");
         }
@@ -24,12 +26,50 @@ public class Duke {
             System.out.println(" " + tasks[count].printTask());
             count++;
         }
-        System.out.println(horizontalLineBottom);
+        System.out.println(HORIZONTAL_LINE_BOTTOM);
     }
 
     public static void exit() {
-        System.out.println(horizontalLineTop + " Bye. Hope to see you again soon!\n" + horizontalLineBottom);
+        System.out.println(HORIZONTAL_LINE_TOP + " Bye. Hope to see you again soon!\n" + HORIZONTAL_LINE_BOTTOM);
         hasUserExited = true;
+    }
+
+    public static void getCommand(String getUserInput) throws DukeException {
+        String[] description;
+        String separate[];
+        int inputSize;
+        if (getUserInput.equals("bye")) {
+            exit();
+        } else if (getUserInput.isEmpty()) {
+            System.out.println(HORIZONTAL_LINE_TOP + " Please input a task!\n" + HORIZONTAL_LINE_BOTTOM);
+        } else if (getUserInput.equals("list")) {
+            listTasks();
+        } else if (getUserInput.startsWith("done")) {
+            inputSize = "done".length();
+            description = getUserInput.split(" ");
+            int taskNumber = Integer.parseInt(description[1]) - 1;
+            tasks[taskNumber].markAsDone();
+            System.out.println(tasks[taskNumber].printDone());
+        } else if (getUserInput.startsWith("todo")) {
+            description = getUserInput.split("todo ");
+            addTask(new ToDo(description[1], taskCount));
+        } else if (getUserInput.startsWith("deadline")) {
+            int by = getUserInput.indexOf("/");
+            separate = getUserInput.split(" /by ");
+            description = separate[0].split(" ");
+            String dueDate = separate[1].trim();
+            addTask(new Deadline(description[1], dueDate, taskCount));
+        } else if (getUserInput.startsWith("event")) {
+            int at = getUserInput.indexOf("/");
+            separate = getUserInput.split(" /at ");
+            description = separate[0].split(" ");
+            String eventTiming = separate[1].trim();
+            addTask(new Event(description[1], eventTiming, taskCount));
+        } else {
+            throw new DukeException();
+        }
+
+
     }
 
     public static void main(String[] args) {
@@ -39,45 +79,31 @@ public class Duke {
                 + " DD   DD uu   uu kk kk  eeeee\n"
                 + " DDDDDD   uuuu u kk  kk  eeeee\n";
         System.out.println(" Hello from\n\n" + logo);
-        System.out.println(horizontalLineTop + " Hello! I'm Duke, your friendly neighbourhood task manager!\n"
-                + " How can I help you?\n" + horizontalLineBottom);
+        System.out.println(HORIZONTAL_LINE_TOP + " Hello! I'm Duke, your friendly neighbourhood task manager!\n"
+                + " How can I help you?\n" + HORIZONTAL_LINE_BOTTOM);
         String getUserInput;
-        String description;
-        int inputSize;
         Scanner in = new Scanner(System.in);
 
         while (!hasUserExited) {
             getUserInput = in.nextLine();
-            if (getUserInput.equals("bye")) {
-                exit();
-            } else if (getUserInput.isEmpty()) {
-                System.out.println(horizontalLineTop + " Please input a task!\n" + horizontalLineBottom);
-            } else if (getUserInput.equals("list")) {
-                listTasks();
-            } else if (getUserInput.startsWith("done")) {
-                inputSize = "done".length();
-                description = getUserInput.substring(inputSize).trim();
-                int taskNumber = Integer.parseInt(description) - 1;
-                tasks[taskNumber].markAsDone();
-                System.out.println(tasks[taskNumber].printDone());
-            } else if (getUserInput.startsWith("todo")) {
-                inputSize = "todo".length();
-                description = getUserInput.substring(inputSize).trim();
-                addTask(new ToDo(description, taskCount));
-            } else if(getUserInput.startsWith("deadline")) {
-                int by = getUserInput.indexOf("/");
-                inputSize = "deadline".length();
-                description = getUserInput.substring(inputSize + 1, by - 1);
-                String eventTiming = getUserInput.substring(by + 4).trim();
-                addTask(new Deadline(description, eventTiming, taskCount));
-            } else if(getUserInput.startsWith("event")) {
-                int at = getUserInput.indexOf("/");
-                inputSize = "event".length();
-                description = getUserInput.substring(inputSize + 1, at - 1);
-                String eventTiming = getUserInput.substring(at + 4).trim();
-                addTask(new Event(description, eventTiming, taskCount));
-            } else {
-                addTask(new Task(getUserInput, taskCount));
+            String separate[];
+            separate = getUserInput.split(" ");
+            String command;
+            command = separate[0];
+            try {
+                getCommand(getUserInput);
+            } catch (IndexOutOfBoundsException e){
+                System.out.println(HORIZONTAL_LINE_TOP
+                        + "☹ OOPS!!! The description of a " + command + " cannot be empty.\n"
+                        + HORIZONTAL_LINE_BOTTOM);
+            } catch (NumberFormatException e) {
+                System.out.println(HORIZONTAL_LINE_TOP
+                        + "☹ OOPS!!! Please input a valid task number to mark it as done.\n"
+                        + HORIZONTAL_LINE_BOTTOM);
+            } catch (DukeException e) {
+                System.out.println(HORIZONTAL_LINE_TOP
+                        + "☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
+                        + HORIZONTAL_LINE_BOTTOM);
             }
         }
     }
