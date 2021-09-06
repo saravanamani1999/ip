@@ -25,4 +25,5 @@ public class Deadline extends Task {
         return horizontalLine + " Nice! I've marked this task as done:\n [" + getTaskType() + "]["
                 + getStatusIcon() + "] " + description + " (by: " + by + ")" + horizontalLine;
     }
+
 }
