@@ -1,10 +1,12 @@
+package exceptions;
+
 public class DeadlineTimingException extends DukeException {
 
     @Override
     public void sendMessage() {
-        System.out.println(HORIZONTAL_LINE_TOP
+        System.out.println(DukeException.HORIZONTAL_LINE_TOP
                 + " ☹ OOPS!!! The deadline timing is missing.\n"
-                + HORIZONTAL_LINE_BOTTOM);
+                + DukeException.HORIZONTAL_LINE_BOTTOM);
     }
 
 }

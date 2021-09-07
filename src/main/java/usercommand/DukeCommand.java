@@ -1,3 +1,7 @@
+package usercommand;
+
+import exceptions.DukeException;
+
 public class DukeCommand {
 
     protected static Task[] tasks = new Task[100];
