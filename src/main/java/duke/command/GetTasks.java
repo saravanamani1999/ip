@@ -1,10 +1,13 @@
-package usercommand;
+package duke.command;
 
-import exceptions.DukeException;
-import exceptions.InvalidCommandException;
-import exceptions.InvalidTaskNumberException;
-import exceptions.EventTimingException;
-import exceptions.DeadlineTimingException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.ToDo;
+import duke.exceptions.DukeException;
+import duke.exceptions.InvalidCommandException;
+import duke.exceptions.InvalidTaskNumberException;
+import duke.exceptions.EventTimingException;
+import duke.exceptions.DeadlineTimingException;
 
 public class GetTasks extends DukeCommand {
 
