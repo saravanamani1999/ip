@@ -1,6 +1,5 @@
-import exceptions.DukeException;
-import usercommand.DukeCommand;
-
+import duke.exceptions.DukeException;
+import duke.command.DukeCommand;
 import java.util.Scanner;
 
 public class Duke {

@@ -1,6 +1,7 @@
-package usercommand;
+package duke.command;
 
-import exceptions.DukeException;
+import duke.task.Task;
+import duke.exceptions.DukeException;
 
 public class DukeCommand {
 
