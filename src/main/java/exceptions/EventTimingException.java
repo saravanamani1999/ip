@@ -1,3 +1,7 @@
+package exceptions;
+
+import exceptions.DukeException;
+
 public class EventTimingException extends DukeException {
 
     @Override

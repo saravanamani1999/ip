@@ -1,3 +1,5 @@
+package exceptions;
+
 public class DukeException extends Exception {
 
     protected static final String HORIZONTAL_LINE_TOP = "\n______________________________" +
