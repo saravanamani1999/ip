@@ -20,16 +20,16 @@ public class GetTasks extends DukeCommand {
                 throw new InvalidTaskNumberException();
             }
             int taskNumber = Integer.parseInt(description[1]) - 1;
-            if (tasks[taskNumber] == null) {
+            if (tasks.get(taskNumber) == null) {
                 throw new InvalidTaskNumberException();
             }
-            if (tasks[taskNumber].getStatusIcon().equals("X")) {
+            if (tasks.get(taskNumber).getStatusIcon().equals("X")) {
                 System.out.println(HORIZONTAL_LINE_TOP
                         + " I've already marked the task as done!\n"
                         + HORIZONTAL_LINE_BOTTOM);
             } else {
-                tasks[taskNumber].markAsDone();
-                System.out.println(tasks[taskNumber].printDone());
+                tasks.get(taskNumber).markAsDone();
+                System.out.println(tasks.get(taskNumber).printDone());
             }
             break;
         case "todo":

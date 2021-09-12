@@ -3,9 +3,10 @@ package duke.command;
 import duke.task.Task;
 import duke.exceptions.DukeException;
 
-public class DukeCommand {
+import java.util.ArrayList;
 
-    protected static Task[] tasks = new Task[100];
+public class DukeCommand {
+    public static ArrayList<Task> tasks = new ArrayList<>();
     protected static final String HORIZONTAL_LINE_TOP = "\n______________________________" +
             "______________________________\n";
     protected static final String HORIZONTAL_LINE_BOTTOM = "_______________________________" +
@@ -15,19 +16,19 @@ public class DukeCommand {
     protected static String[] separate;
 
     public static void addTask(Task newTask) {
-        tasks[taskCount] = newTask;
+        tasks.add(newTask);
         System.out.println(newTask.printOk());
-        taskCount++;
+        taskCount = tasks.size();
     }
 
     public static void listTasks() {
         System.out.print(HORIZONTAL_LINE_TOP + " Here are the tasks in your list:\n");
-        if(taskCount == 0) {
+        if(tasks.size() == 0) {
             System.out.println(" You have no tasks!");
         }
         int count = 0;
-        while (tasks[count] != null) {
-            System.out.println(" " + tasks[count].printTask());
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.println(" " + tasks.get(count).printTask());
             count++;
         }
         System.out.println(HORIZONTAL_LINE_BOTTOM);

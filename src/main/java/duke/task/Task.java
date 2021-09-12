@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.command.DukeCommand;
+
 public class Task {
 
     protected String description;
@@ -51,7 +53,7 @@ public class Task {
     }
 
     public String printDone() {
-        return horizontalLine + " Nice! I've marked this task as done:\n     [" + getTaskType() + "]["
+        return horizontalLine + " Nice! I've marked this task as done:\n   [" + getTaskType() + "]["
                 + getStatusIcon() + "] " + description + horizontalLine;
     }
 }
