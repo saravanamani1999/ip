@@ -46,7 +46,10 @@ public class Task {
     }
 
     public String printOkEnd() {
-        return " Now you have ";
+        if (taskCount > 1) {
+            isPlural = true;
+        }
+        return " Now you have " + taskCount + (isPlural ? " tasks" : " task") +" in the list." + horizontalLine;
     }
 
     public String printDone() {

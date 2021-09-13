@@ -19,11 +19,7 @@ public class DukeCommand {
     public static void addTask(Task newTask) {
         tasks.add(newTask);
         taskCount = tasks.size();
-        if (taskCount > 1) {
-            isPlural = true;
-        }
-        System.out.println(newTask.printOk() + taskCount + (isPlural ? " tasks" : " task")
-                + " in the list.\n" + HORIZONTAL_LINE_BOTTOM);
+        System.out.println(newTask.printOk());
     }
 
     public static void listTasks() {
