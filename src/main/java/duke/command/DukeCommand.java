@@ -14,11 +14,16 @@ public class DukeCommand {
     protected static int taskCount = 0;
     protected static String[] description;
     protected static String[] separate;
+    public static boolean isPlural = false;
 
     public static void addTask(Task newTask) {
         tasks.add(newTask);
-        System.out.println(newTask.printOk());
         taskCount = tasks.size();
+        if (taskCount > 1) {
+            isPlural = true;
+        }
+        System.out.println(newTask.printOk() + taskCount + (isPlural ? " tasks" : " task")
+                + " in the list.\n" + HORIZONTAL_LINE_BOTTOM);
     }
 
     public static void listTasks() {
