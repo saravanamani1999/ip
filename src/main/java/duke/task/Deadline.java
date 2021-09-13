@@ -28,6 +28,11 @@ public class Deadline extends Task {
                 + getStatusIcon() + "] " + description + " (by: " + by + ")" + horizontalLine;
     }
 
+    public String printDelete() {
+        return horizontalLine + " Noted. I've removed this task:\n   [" + getTaskType() + "]["
+                + getStatusIcon() + "] " + description + " (by: " + by + ")";
+    }
+
     public String fileContent() {
         return "D [" + getStatusIcon() + "] " + description + " by: " + by;
     }

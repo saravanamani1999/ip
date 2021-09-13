@@ -91,10 +91,8 @@ public class DukeCommand extends Duke {
 
     public static void deleteTask(int taskNumber) {
         taskCount = tasks.size() - 1;
-        if (taskCount != 1) {
-            isPlural = true;
-        }
-        System.out.print(" " + tasks.get(taskNumber).printDelete() + "\nNow you have "
+        isPlural = tasks.size() != 2;
+        System.out.println(" " + tasks.get(taskNumber).printDelete() + "\nNow you have "
                 + taskCount + (isPlural ? " tasks" : " task")
                 + " in the list.\n" + HORIZONTAL_LINE_BOTTOM);
         tasks.remove(taskNumber);

@@ -37,7 +37,11 @@ public class GetTasks extends DukeCommand {
             break;
         case "todo":
             description = getUserInput.split("todo ");
+            if (description[1].trim().isEmpty()) {
+                throw new IndexOutOfBoundsException();
+            }
             addTask(new ToDo(description[1]));
+
             break;
         case "deadline":
             int by = getUserInput.indexOf("/");

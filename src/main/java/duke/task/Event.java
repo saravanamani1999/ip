@@ -28,6 +28,11 @@ public class Event extends Task {
                 + getStatusIcon() + "] " + description + " (at: " + at + ")" + horizontalLine;
     }
 
+    public String printDelete() {
+        return horizontalLine + " Noted. I've removed this task:\n   [" + getTaskType() + "]["
+                + getStatusIcon() + "] " + description + " (at: " + at + ")";
+    }
+
     public String fileContent() {
         return "E [" + getStatusIcon() + "] " + description + " at: " + at;
     }

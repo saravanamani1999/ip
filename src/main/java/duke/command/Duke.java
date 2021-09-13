@@ -57,9 +57,9 @@ public class Duke {
             System.out.print(" File not found\n" + HORIZONTAL_LINE_BOTTOM);
         }
         if (tasks.size() == 0) {
-            System.out.println(" Task file is empty\n" + HORIZONTAL_LINE_BOTTOM);
+            System.out.println(" No tasks found in the task file\n" + HORIZONTAL_LINE_BOTTOM);
         } else {
-            System.out.println(" Tasks loaded from file\n There are " + tasks.size()
+            System.out.println(" You have " + tasks.size()
                     +  " tasks.\n" + HORIZONTAL_LINE_BOTTOM);
         }
 
