@@ -33,7 +33,7 @@ public class Task {
     }
 
     public String printTask() {
-        return taskCount + "." + "[" + getTaskType() + "]" + "["
+        return "." + "[" + getTaskType() + "]" + "["
                 + getStatusIcon() + "] " + description;
     }
 
@@ -46,14 +46,17 @@ public class Task {
     }
 
     public String printOkEnd() {
-        if (taskCount > 1) {
-            isPlural = true;
-        }
-        return " Now you have " + taskCount + (isPlural ? " tasks" : " task") +" in the list." + horizontalLine;
+        return " Now you have ";
     }
 
     public String printDone() {
         return horizontalLine + " Nice! I've marked this task as done:\n   [" + getTaskType() + "]["
                 + getStatusIcon() + "] " + description + horizontalLine;
     }
+
+    public String printDelete() {
+        return horizontalLine + " Noted. I've removed this task:\n   [" + getTaskType() + "]["
+                + getStatusIcon() + "] " + description;
+    }
+
 }

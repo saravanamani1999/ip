@@ -19,7 +19,7 @@ public class Deadline extends Task {
     }
 
     public String printTask() {
-        return taskCount + "." + "[" + getTaskType() + "]" + "["
+        return "." + "[" + getTaskType() + "]" + "["
                 + getStatusIcon() + "] " + description + " (by: " + by + ")";
     }
 

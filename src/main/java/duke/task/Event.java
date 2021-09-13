@@ -19,7 +19,7 @@ public class Event extends Task {
     }
 
     public String printTask() {
-        return taskCount + "." + "[" + getTaskType() + "]" + "["
+        return "." + "[" + getTaskType() + "]" + "["
                 + getStatusIcon() + "] " + description + " (at: " + at + ")";
     }
 

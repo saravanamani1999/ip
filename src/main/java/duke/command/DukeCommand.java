@@ -14,11 +14,16 @@ public class DukeCommand {
     protected static int taskCount = 0;
     protected static String[] description;
     protected static String[] separate;
+    protected static boolean isPlural = false;
 
     public static void addTask(Task newTask) {
         tasks.add(newTask);
-        System.out.println(newTask.printOk());
         taskCount = tasks.size();
+        if (taskCount > 1) {
+            isPlural = true;
+        }
+        System.out.println(newTask.printOk() + taskCount + (isPlural ? " tasks" : " task")
+                + " in the list.\n" + HORIZONTAL_LINE_BOTTOM);
     }
 
     public static void listTasks() {
@@ -26,12 +31,25 @@ public class DukeCommand {
         if(tasks.size() == 0) {
             System.out.println(" You have no tasks!");
         }
-        int count = 0;
+//        int count = 0;
+        int taskNumber;
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println(" " + tasks.get(count).printTask());
-            count++;
+            taskNumber = i + 1;
+            System.out.println(" " + taskNumber + tasks.get(i).printTask());
+//            count++;
         }
         System.out.println(HORIZONTAL_LINE_BOTTOM);
+    }
+
+    public static void deleteTask(int taskNumber) {
+        taskCount = tasks.size() - 1;
+        if (taskCount != 1) {
+            isPlural = true;
+        }
+        System.out.print(" " + tasks.get(taskNumber).printDelete() + "\nNow you have "
+                + taskCount + (isPlural ? " tasks" : " task")
+                + " in the list.\n" + HORIZONTAL_LINE_BOTTOM);
+        tasks.remove(taskNumber);
     }
 
     public static void getCommand(String getUserInput) throws DukeException {

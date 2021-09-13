@@ -12,14 +12,15 @@ import duke.exceptions.DeadlineTimingException;
 public class GetTasks extends DukeCommand {
 
     public static void followCommand(String getUserInput) throws DukeException {
+        int taskNumber;
         String userCommand = (getUserInput.split(" "))[0];
         switch (userCommand) {
         case "done":
-            description = getUserInput.split(" ");
+            description = getUserInput.split("done ");
             if (description.length < 2 || Integer.parseInt(description[1]) == 0) {
                 throw new InvalidTaskNumberException();
             }
-            int taskNumber = Integer.parseInt(description[1]) - 1;
+            taskNumber = Integer.parseInt(description[1]) - 1;
             if (tasks.get(taskNumber) == null) {
                 throw new InvalidTaskNumberException();
             }
@@ -33,13 +34,13 @@ public class GetTasks extends DukeCommand {
             }
             break;
         case "todo":
-            description = getUserInput.split(" ");
+            description = getUserInput.split("todo ");
             addTask(new ToDo(description[1], taskCount));
             break;
         case "deadline":
             int by = getUserInput.indexOf("/");
             separate = getUserInput.split("/by");
-            description = separate[0].trim().split(" ");
+            description = separate[0].trim().split("deadline ");
             if ((by == -1 && (description[1] != null))
                     || (separate.length == 1)
                     || (separate[1].trim().isEmpty())) {
@@ -51,7 +52,7 @@ public class GetTasks extends DukeCommand {
         case "event":
             int at = getUserInput.indexOf("/");
             separate = getUserInput.split("/at");
-            description = separate[0].trim().split(" ");
+            description = separate[0].trim().split("event ");
             if ((at == -1 && (description[1] != null))
                     || (separate.length == 1)
                     || (separate[1].trim().isEmpty())) {
@@ -59,6 +60,18 @@ public class GetTasks extends DukeCommand {
             }
             String eventTiming = separate[1].trim();
             addTask(new Event(description[1], eventTiming, taskCount));
+            break;
+        case "delete":
+            description = getUserInput.split(" ");
+            if (description.length < 2 || Integer.parseInt(description[1]) == 0) {
+                throw new InvalidTaskNumberException();
+            }
+            taskNumber = Integer.parseInt(description[1]) - 1;
+            if (tasks.get(taskNumber) == null) {
+                throw new InvalidTaskNumberException();
+            } else {
+                deleteTask(taskNumber);
+            }
             break;
         default:
             throw new InvalidCommandException();
