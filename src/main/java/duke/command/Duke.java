@@ -6,6 +6,7 @@ import duke.task.Task;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -30,22 +31,25 @@ public class Duke {
         try {
             DukeCommand.writeToFile(filePath);
         } catch (IOException e) {
-            System.out.println(HORIZONTAL_LINE_TOP + " ☹ OOPS!!! Something went wrong!.\n" + HORIZONTAL_LINE_BOTTOM);
+            System.out.println(HORIZONTAL_LINE_TOP + " ☹ OOPS!!! Something went wrong!.\n"
+                    + HORIZONTAL_LINE_BOTTOM);
         }
     }
 
     public static void exitMessage() {
-        System.out.println(HORIZONTAL_LINE_TOP + " Bye. Hope to see you again soon!\n" + HORIZONTAL_LINE_BOTTOM);
+        System.out.println(HORIZONTAL_LINE_TOP + " Bye. Hope to see you again soon!\n"
+                + HORIZONTAL_LINE_BOTTOM);
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         String logo = " DDDDD           kk\n"
                 + " DD  DD  uu   uu kk  kk   eee\n"
                 + " DD   DD uu   uu kkkkk  ee   e\n"
                 + " DD   DD uu   uu kk kk  eeeee\n"
                 + " DDDDDD   uuuu u kk  kk  eeeee\n";
         System.out.println(" Hello from\n\n" + logo);
-        System.out.print(HORIZONTAL_LINE_TOP + " Hello! I'm duke.command.Duke, your friendly neighbourhood task manager!\n"
+        System.out.print(HORIZONTAL_LINE_TOP
+                + " Hello! I'm duke.command.Duke, your friendly neighbourhood task manager!\n"
                 + " How can I help you?\n" + HORIZONTAL_LINE_BOTTOM);
         try {
             DukeCommand.readFile(file, tasks);
@@ -55,8 +59,8 @@ public class Duke {
         if (tasks.size() == 0) {
             System.out.println(" Tasks file empty\n" + HORIZONTAL_LINE_BOTTOM);
         } else {
-            System.out.println(" Tasks loaded from file\n There are " + tasks.size() +  " tasks.\n" + HORIZONTAL_LINE_BOTTOM);
-
+            System.out.println(" Tasks loaded from file\n There are " + tasks.size()
+                    +  " tasks.\n" + HORIZONTAL_LINE_BOTTOM);
         }
 
         String getUserInput;
@@ -93,6 +97,7 @@ public class Duke {
         saveToFile(file);
         exitMessage();
     }
+
 }
 
 

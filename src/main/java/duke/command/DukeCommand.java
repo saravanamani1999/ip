@@ -13,7 +13,6 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
 public class DukeCommand extends Duke {
 
     protected static int taskCount = 0;

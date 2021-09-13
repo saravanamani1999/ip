@@ -59,4 +59,5 @@ public class Task {
     public String fileContent() {
         return " [" + getStatusIcon() + "] " + description;
     }
+
 }
