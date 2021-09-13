@@ -9,9 +9,11 @@ import duke.exceptions.InvalidTaskNumberException;
 import duke.exceptions.EventTimingException;
 import duke.exceptions.DeadlineTimingException;
 
+import java.io.IOException;
+
 public class GetTasks extends DukeCommand {
 
-    public static void followCommand(String getUserInput) throws DukeException {
+    public static void followCommand(String getUserInput) throws DukeException, IOException {
         String userCommand = (getUserInput.split(" "))[0];
         switch (userCommand) {
         case "done":

@@ -8,7 +8,7 @@
 
 
 ____________________________________________________________
- Hello! I'm Duke, your friendly neighbourhood task manager!
+ Hello! I'm duke.command.Duke, your friendly neighbourhood task manager!
  How can I help you?
 ____________________________________________________________
 

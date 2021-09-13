@@ -20,4 +20,8 @@ public class ToDo extends Task {
                 + getStatusIcon() + "] " + description + horizontalLine;
     }
 
+    public String fileContent() {
+        return "T [" + getStatusIcon() + "] " + description;
+    }
+
 }
