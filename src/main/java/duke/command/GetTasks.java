@@ -16,7 +16,7 @@ public class GetTasks extends DukeCommand {
         String userCommand = (getUserInput.split(" "))[0];
         switch (userCommand) {
         case "done":
-            description = getUserInput.split(" ");
+            description = getUserInput.split("done ");
             if (description.length < 2 || Integer.parseInt(description[1]) == 0) {
                 throw new InvalidTaskNumberException();
             }
@@ -34,13 +34,13 @@ public class GetTasks extends DukeCommand {
             }
             break;
         case "todo":
-            description = getUserInput.split(" ");
+            description = getUserInput.split("todo ");
             addTask(new ToDo(description[1], taskCount));
             break;
         case "deadline":
             int by = getUserInput.indexOf("/");
             separate = getUserInput.split("/by");
-            description = separate[0].trim().split(" ");
+            description = separate[0].trim().split("deadline ");
             if ((by == -1 && (description[1] != null))
                     || (separate.length == 1)
                     || (separate[1].trim().isEmpty())) {
@@ -52,7 +52,7 @@ public class GetTasks extends DukeCommand {
         case "event":
             int at = getUserInput.indexOf("/");
             separate = getUserInput.split("/at");
-            description = separate[0].trim().split(" ");
+            description = separate[0].trim().split("event ");
             if ((at == -1 && (description[1] != null))
                     || (separate.length == 1)
                     || (separate[1].trim().isEmpty())) {
