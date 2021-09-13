@@ -35,7 +35,7 @@ public class GetTasks extends DukeCommand {
             break;
         case "todo":
             description = getUserInput.split("todo ");
-            addTask(new ToDo(description[1], taskCount));
+            addTask(new ToDo(description[1]));
             break;
         case "deadline":
             int by = getUserInput.indexOf("/");
@@ -47,7 +47,7 @@ public class GetTasks extends DukeCommand {
                 throw new DeadlineTimingException();
             }
             String dueDate = separate[1].trim();
-            addTask(new Deadline(description[1], dueDate, taskCount));
+            addTask(new Deadline(description[1], dueDate));
             break;
         case "event":
             int at = getUserInput.indexOf("/");
@@ -59,7 +59,7 @@ public class GetTasks extends DukeCommand {
                 throw new EventTimingException();
             }
             String eventTiming = separate[1].trim();
-            addTask(new Event(description[1], eventTiming, taskCount));
+            addTask(new Event(description[1], eventTiming));
             break;
         case "delete":
             description = getUserInput.split(" ");

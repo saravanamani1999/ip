@@ -10,9 +10,8 @@ public class Task {
     protected int taskCount;
     protected boolean isPlural = false;
 
-    public Task(String description, int taskCount) {
+    public Task(String description) {
         this.description = description;
-        this.taskCount = taskCount + 1;
         this.isDone = false;
     }
 
@@ -33,7 +32,7 @@ public class Task {
     }
 
     public String printTask() {
-        return taskCount + "." + "[" + getTaskType() + "]" + "["
+        return "." + "[" + getTaskType() + "]" + "["
                 + getStatusIcon() + "] " + description;
     }
 
@@ -46,10 +45,7 @@ public class Task {
     }
 
     public String printOkEnd() {
-        if (taskCount > 1) {
-            isPlural = true;
-        }
-        return " Now you have " + taskCount + (isPlural ? " tasks" : " task") +" in the list." + horizontalLine;
+        return " Now you have ";
     }
 
     public String printDone() {
