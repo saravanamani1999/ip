@@ -31,12 +31,10 @@ public class DukeCommand {
         if(tasks.size() == 0) {
             System.out.println(" You have no tasks!");
         }
-//        int count = 0;
-        int taskNumber;
+        int count = 0;
         for (int i = 0; i < tasks.size(); i++) {
-            taskNumber = i + 1;
-            System.out.println(" " + taskNumber + tasks.get(i).printTask());
-//            count++;
+            System.out.println(" " + tasks.get(count).printTask());
+            count++;
         }
         System.out.println(HORIZONTAL_LINE_BOTTOM);
     }

@@ -33,7 +33,7 @@ public class Task {
     }
 
     public String printTask() {
-        return "." + "[" + getTaskType() + "]" + "["
+        return taskCount + "." + "[" + getTaskType() + "]" + "["
                 + getStatusIcon() + "] " + description;
     }
 
