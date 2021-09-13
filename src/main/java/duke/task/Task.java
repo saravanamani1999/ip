@@ -52,4 +52,10 @@ public class Task {
         return horizontalLine + " Nice! I've marked this task as done:\n   [" + getTaskType() + "]["
                 + getStatusIcon() + "] " + description + horizontalLine;
     }
+
+    public String printDelete() {
+        return horizontalLine + " Noted. I've removed this task:\n   [" + getTaskType() + "]["
+                + getStatusIcon() + "] " + description;
+    }
+
 }

@@ -12,6 +12,7 @@ import duke.exceptions.DeadlineTimingException;
 public class GetTasks extends DukeCommand {
 
     public static void followCommand(String getUserInput) throws DukeException {
+        int taskNumber;
         String userCommand = (getUserInput.split(" "))[0];
         switch (userCommand) {
         case "done":
@@ -19,7 +20,7 @@ public class GetTasks extends DukeCommand {
             if (description.length < 2 || Integer.parseInt(description[1]) == 0) {
                 throw new InvalidTaskNumberException();
             }
-            int taskNumber = Integer.parseInt(description[1]) - 1;
+            taskNumber = Integer.parseInt(description[1]) - 1;
             if (tasks.get(taskNumber) == null) {
                 throw new InvalidTaskNumberException();
             }
@@ -59,6 +60,18 @@ public class GetTasks extends DukeCommand {
             }
             String eventTiming = separate[1].trim();
             addTask(new Event(description[1], eventTiming));
+            break;
+        case "delete":
+            description = getUserInput.split(" ");
+            if (description.length < 2 || Integer.parseInt(description[1]) == 0) {
+                throw new InvalidTaskNumberException();
+            }
+            taskNumber = Integer.parseInt(description[1]) - 1;
+            if (tasks.get(taskNumber) == null) {
+                throw new InvalidTaskNumberException();
+            } else {
+                deleteTask(taskNumber);
+            }
             break;
         default:
             throw new InvalidCommandException();

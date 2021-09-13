@@ -39,6 +39,17 @@ public class DukeCommand {
         System.out.println(HORIZONTAL_LINE_BOTTOM);
     }
 
+    public static void deleteTask(int taskNumber) {
+        taskCount = tasks.size() - 1;
+        if (taskCount != 1) {
+            isPlural = true;
+        }
+        System.out.print(" " + tasks.get(taskNumber).printDelete() + "\nNow you have "
+                + taskCount + (isPlural ? " tasks" : " task")
+                + " in the list.\n" + HORIZONTAL_LINE_BOTTOM);
+        tasks.remove(taskNumber);
+    }
+
     public static void getCommand(String getUserInput) throws DukeException {
         String userCommand = (getUserInput.split(" "))[0];
         if (userCommand.equals("list")) {
