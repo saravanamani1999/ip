@@ -19,7 +19,7 @@ public class Event extends Task {
     }
 
     public String printTask() {
-        return taskCount + "." + "[" + getTaskType() + "]" + "["
+        return "." + "[" + getTaskType() + "]" + "["
                 + getStatusIcon() + "] " + description + " (at: " + at + ")";
     }
 
@@ -27,4 +27,9 @@ public class Event extends Task {
         return horizontalLine + " Nice! I've marked this task as done:\n   [" + getTaskType() + "]["
                 + getStatusIcon() + "] " + description + " (at: " + at + ")" + horizontalLine;
     }
+
+    public String fileContent() {
+        return "E [" + getStatusIcon() + "] " + description + " at: " + at;
+    }
+
 }

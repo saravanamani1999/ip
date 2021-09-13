@@ -1,7 +1,5 @@
 package duke.task;
 
-import duke.command.DukeCommand;
-
 public class Task {
 
     protected String description;
@@ -58,4 +56,7 @@ public class Task {
                 + getStatusIcon() + "] " + description;
     }
 
+    public String fileContent() {
+        return " [" + getStatusIcon() + "] " + description;
+    }
 }

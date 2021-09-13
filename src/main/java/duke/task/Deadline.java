@@ -19,13 +19,17 @@ public class Deadline extends Task {
     }
 
     public String printTask() {
-        return taskCount + "." + "[" + getTaskType() + "]" + "["
+        return "." + "[" + getTaskType() + "]" + "["
                 + getStatusIcon() + "] " + description + " (by: " + by + ")";
     }
 
     public String printDone() {
         return horizontalLine + " Nice! I've marked this task as done:\n   [" + getTaskType() + "]["
                 + getStatusIcon() + "] " + description + " (by: " + by + ")" + horizontalLine;
+    }
+
+    public String fileContent() {
+        return "D [" + getStatusIcon() + "] " + description + " by: " + by;
     }
 
 }
