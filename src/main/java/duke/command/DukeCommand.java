@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.task.Deadline;
+import duke.task.Event;
 import duke.task.Task;
 import duke.exceptions.DukeException;
 import duke.task.ToDo;
@@ -48,7 +49,7 @@ public class DukeCommand extends Duke {
                 separate = fileContents.get(i).split("at:");
                 description = separate[0].trim().split("]");
                 String eventTiming = separate[1].trim();
-                tasks.add(new Deadline(description[1].trim(), eventTiming));
+                tasks.add(new Event(description[1].trim(), eventTiming));
                 if (fileContents.get(i).contains("[X]")) {
                     tasks.get(i).markAsDone();
                 }
@@ -68,6 +69,7 @@ public class DukeCommand extends Duke {
 
     public static void addTask(Task newTask) throws IOException {
         tasks.add(newTask);
+        saveToFile(file);
         taskCount = tasks.size();
         if (taskCount > 1) {
             isPlural = true;
@@ -96,6 +98,7 @@ public class DukeCommand extends Duke {
                 + taskCount + (isPlural ? " tasks" : " task")
                 + " in the list.\n" + HORIZONTAL_LINE_BOTTOM);
         tasks.remove(taskNumber);
+        saveToFile(file);
     }
 
     public static void getCommand(String getUserInput) throws DukeException, IOException {

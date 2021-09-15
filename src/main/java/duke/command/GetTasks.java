@@ -32,6 +32,7 @@ public class GetTasks extends DukeCommand {
                         + HORIZONTAL_LINE_BOTTOM);
             } else {
                 tasks.get(taskNumber).markAsDone();
+                saveToFile(file);
                 System.out.println(tasks.get(taskNumber).printDone());
             }
             break;

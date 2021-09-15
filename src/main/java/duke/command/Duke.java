@@ -94,7 +94,6 @@ public class Duke {
                 }
             }
         }
-        saveToFile(file);
         exitMessage();
     }
 
