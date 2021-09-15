@@ -49,7 +49,7 @@ public class DukeCommand extends Duke {
                 separate = fileContents.get(i).split("at:");
                 description = separate[0].trim().split("]");
                 String eventTiming = separate[1].trim();
-                tasks.add(new Deadline(description[1].trim(), eventTiming));
+                tasks.add(new Event(description[1].trim(), eventTiming));
                 if (fileContents.get(i).contains("[X]")) {
                     tasks.get(i).markAsDone();
                 }
