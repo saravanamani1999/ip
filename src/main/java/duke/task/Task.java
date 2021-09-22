@@ -4,9 +4,7 @@ public class Task {
 
     protected String description;
     protected boolean isDone;
-    protected String horizontalLine = "\n____________________________________________________________\n";
-    protected int taskCount;
-    protected boolean isPlural = false;
+    protected String HORIZONTAL_LINE = "\n____________________________________________________________\n";
 
     public Task(String description) {
         this.description = description;
@@ -35,11 +33,11 @@ public class Task {
     }
 
     public String printOk() {
-        return horizontalLine + " added: " + description + horizontalLine;
+        return HORIZONTAL_LINE + " added: " + description + HORIZONTAL_LINE;
     }
 
     public String printOkStart() {
-        return horizontalLine + " Got it. I've added this task:\n";
+        return HORIZONTAL_LINE + " Got it. I've added this task:\n";
     }
 
     public String printOkEnd() {
@@ -47,12 +45,12 @@ public class Task {
     }
 
     public String printDone() {
-        return horizontalLine + " Nice! I've marked this task as done:\n   [" + getTaskType() + "]["
-                + getStatusIcon() + "] " + description + horizontalLine;
+        return HORIZONTAL_LINE + " Nice! I've marked this task as done:\n   [" + getTaskType() + "]["
+                + getStatusIcon() + "] " + description + HORIZONTAL_LINE;
     }
 
     public String printDelete() {
-        return horizontalLine + " Noted. I've removed this task:\n   [" + getTaskType() + "]["
+        return HORIZONTAL_LINE + " Noted. I've removed this task:\n   [" + getTaskType() + "]["
                 + getStatusIcon() + "] " + description;
     }
 
