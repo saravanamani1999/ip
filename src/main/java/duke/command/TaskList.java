@@ -30,11 +30,11 @@ public class TaskList {
     public static final String EVENT = "event";
     public static final String DONE = "done";
     public static final String DELETE = "delete";
-<<<<<<< HEAD
-    public static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-=======
     public static final String FIND = "find";
->>>>>>> branch-Level-9
+
+    public static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+
+
 
     public void addTask(Task newTask) {
         tasks.add(newTask);
