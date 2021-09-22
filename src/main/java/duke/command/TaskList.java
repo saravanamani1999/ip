@@ -10,6 +10,9 @@ import duke.Storage;
 import duke.task.ToDo;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -26,6 +29,7 @@ public class TaskList {
     public static final String EVENT = "event";
     public static final String DONE = "done";
     public static final String DELETE = "delete";
+    public static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
 
     public void addTask(Task newTask) {
         tasks.add(newTask);
@@ -53,7 +57,7 @@ public class TaskList {
         Ui.printLineBottom();
     }
 
-    public  void deleteTask(int taskNumber) {
+    public void deleteTask(int taskNumber) {
         taskCount = tasks.size() - 1;
         isPlural = tasks.size() != 2;
         System.out.println(" " + tasks.get(taskNumber).printDelete() + "\nNow you have "
@@ -62,6 +66,15 @@ public class TaskList {
         Ui.printLineBottom();
         tasks.remove(taskNumber);
         Storage.saveToFile(Duke.file);
+    }
+
+    public static boolean isValidDateTime(String dateTime) {
+        try {
+            LocalDateTime.parse(dateTime,formatter);
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+        return true;
     }
 
     public void executeCommand(String getUserInput, String userCommand) throws DukeException, IOException {
@@ -107,8 +120,12 @@ public class TaskList {
                     || (separate[1].trim().isEmpty())) {
                 throw new DeadlineTimingException();
             }
-            String dueDate = separate[1].trim();
-            addTask(new Deadline(description[1], dueDate));
+            if (!isValidDateTime(separate[1].trim())) {
+                throw new DateTimeFormatException();
+            } else {
+                LocalDateTime dueDate = LocalDateTime.parse(separate[1].trim(), formatter);
+                addTask(new Deadline(description[1], dueDate));
+            }
             break;
         case EVENT:
             int at = getUserInput.indexOf("/");
@@ -119,8 +136,12 @@ public class TaskList {
                     || (separate[1].trim().isEmpty())) {
                 throw new EventTimingException();
             }
-            String eventTiming = separate[1].trim();
-            addTask(new Event(description[1], eventTiming));
+            if (!isValidDateTime(separate[1].trim())) {
+                throw new DateTimeFormatException();
+            } else {
+                LocalDateTime eventTiming = LocalDateTime.parse(separate[1].trim(), formatter);
+                addTask(new Event(description[1], eventTiming));
+            }
             break;
         case DELETE:
             description = getUserInput.split(" ");
