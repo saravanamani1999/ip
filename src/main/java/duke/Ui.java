@@ -84,4 +84,12 @@ public class Ui {
         System.out.println(" Here are the tasks in your list:");
     }
 
+    public static void matchesListHeader() {
+        System.out.println(" Here are the matching tasks in your list:");
+    }
+
+    public static void noMatchesMessage() {
+        System.out.println("\n ☹ There are no matching tasks found!");
+    }
+
 }
