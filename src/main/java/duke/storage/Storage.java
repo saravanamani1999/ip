@@ -1,9 +1,12 @@
-package duke;
+package duke.storage;
 
+import duke.Duke;
+import duke.command.TaskList;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
+import duke.ui.Ui;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -64,7 +67,7 @@ public class Storage {
     public static void writeToFile(String filePath) {
         try {
             FileWriter fw = new FileWriter(filePath);
-            for (Task task : Duke.taskList.tasks) {
+            for (Task task : TaskList.tasks) {
                 String formattedTask = null;
                 formattedTask = task.fileContent();
                 fw.write(formattedTask + System.lineSeparator());

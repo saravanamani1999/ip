@@ -2,6 +2,9 @@ package duke;
 
 import duke.command.TaskList;
 import duke.exceptions.DukeException;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.ui.Ui;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -12,8 +15,8 @@ public class Duke {
 
     public static boolean hasUserExited = false;
     public static String file = "data/duke.txt";
+    private static TaskList taskList;
     private static Ui ui;
-    public static TaskList taskList;
 
     public Duke(String filePath) {
         ui = new Ui();
@@ -21,14 +24,14 @@ public class Duke {
         taskList = new TaskList();
         Ui.welcomeMessage();
         try {
-            storage.readFile(file, taskList.tasks);
+            storage.readFile(file, TaskList.tasks);
         } catch (FileNotFoundException e) {
             ui.fileNotFoundMessage();
         }
-        ui.tasksQuantity(taskList.tasks);
+        ui.tasksQuantity(TaskList.tasks);
     }
 
-    public void run() {
+    private void run() {
         Scanner in = new Scanner(System.in);
         while (!hasUserExited) {
             String fullCommand = ui.readCommand(in);
@@ -36,7 +39,15 @@ public class Duke {
             try {
                 taskList.executeCommand(fullCommand, userCommand);
             } catch (IndexOutOfBoundsException e) {
-                ui.indexOutOfBoundsMessage(userCommand);
+                if (userCommand.equals("done") || userCommand.equals("delete")) {
+                    System.out.println(Ui.HORIZONTAL_LINE_TOP
+                            + "\n ☹ OOPS!!! Please input a valid task number.\n"
+                            + Ui.HORIZONTAL_LINE_BOTTOM);
+                }
+                else {
+                    ui.indexOutOfBoundsMessage(userCommand);
+                }
+
             } catch (NumberFormatException e) {
                 ui.numberFormatMessage();
             } catch (DukeException e) {

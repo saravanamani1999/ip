@@ -1,12 +1,14 @@
 package duke.exceptions;
 
+import duke.ui.Ui;
+
 public class EventTimingException extends DukeException {
 
     @Override
     public void sendMessage() {
-        System.out.println(HORIZONTAL_LINE_TOP
-                + " ☹ OOPS!!! The event timing is missing.\n"
-                + HORIZONTAL_LINE_BOTTOM);
+        System.out.println(Ui.HORIZONTAL_LINE_TOP
+                + "\n ☹ OOPS!!! The event timing is missing.\n"
+                + Ui.HORIZONTAL_LINE_BOTTOM);
     }
 
 }

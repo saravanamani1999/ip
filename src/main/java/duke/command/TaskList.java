@@ -1,13 +1,11 @@
 package duke.command;
 
 import duke.Duke;
-import duke.Ui;
-import duke.exceptions.*;
-import duke.task.Deadline;
-import duke.task.Event;
+import duke.ui.Ui;
+import duke.exceptions.DukeException;
+import duke.exceptions.InvalidCommandException;
 import duke.task.Task;
-import duke.Storage;
-import duke.task.ToDo;
+import duke.storage.Storage;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -17,26 +15,23 @@ import java.util.ArrayList;
 
 public class TaskList {
 
-    public ArrayList<Task> tasks = new ArrayList<>();
-    public static ArrayList<Task> matches = new ArrayList<Task>();
+    public static ArrayList<Task> tasks = new ArrayList<>();
+    public static ArrayList<Task> matches = new ArrayList<>();
     protected static int taskCount = 0;
     protected static String[] description;
     protected static String[] separate;
-    public static boolean isPlural = false;
-    public static final String LIST = "list";
-    public static final String EXIT = "bye";
-    public static final String TODO = "todo";
-    public static final String DEADLINE = "deadline";
-    public static final String EVENT = "event";
-    public static final String DONE = "done";
-    public static final String DELETE = "delete";
-    public static final String FIND = "find";
-
+    private static boolean isPlural = false;
+    private static final String LIST = "list";
+    private static final String EXIT = "bye";
+    private static final String TODO = "todo";
+    private static final String DEADLINE = "deadline";
+    private static final String EVENT = "event";
+    private static final String DONE = "done";
+    private static final String DELETE = "delete";
+    private static final String FIND = "find";
     public static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
 
-
-
-    public void addTask(Task newTask) {
+    public static void addTask(Task newTask) {
         tasks.add(newTask);
         Storage.saveToFile(Duke.file);
         taskCount = tasks.size();
@@ -62,7 +57,7 @@ public class TaskList {
         Ui.printLineBottom();
     }
 
-    public void deleteTask(int taskNumber) {
+    public static void deleteTask(int taskNumber) {
         taskCount = tasks.size() - 1;
         isPlural = tasks.size() != 2;
         System.out.println(" " + tasks.get(taskNumber).printDelete() + "\nNow you have "
@@ -72,7 +67,6 @@ public class TaskList {
         tasks.remove(taskNumber);
         Storage.saveToFile(Duke.file);
     }
-
 
     public static boolean isValidDateTime(String dateTime) {
         try {
@@ -90,11 +84,10 @@ public class TaskList {
                 matches.add(task);
             }
         }
-
     }
 
     public void executeCommand(String getUserInput, String userCommand) throws DukeException, IOException {
-        int taskNumber;
+        int taskNumber = 0;
         switch (userCommand) {
         case EXIT:
             Duke.hasUserExited = true;
@@ -103,91 +96,22 @@ public class TaskList {
             listTasks();
             break;
         case DONE:
-            description = getUserInput.split("done ");
-            if (description.length < 2 || Integer.parseInt(description[1]) == 0) {
-                throw new InvalidTaskNumberException();
-            }
-            taskNumber = Integer.parseInt(description[1]) - 1;
-            if (tasks.get(taskNumber) == null) {
-                throw new InvalidTaskNumberException();
-            }
-            if (tasks.get(taskNumber).getStatusIcon().equals("X")) {
-                Ui.markedAsDone();
-            } else {
-                tasks.get(taskNumber).markAsDone();
-                Storage.saveToFile(Duke.file);
-                System.out.println(tasks.get(taskNumber).printDone());
-            }
+            DoneCommand.execute(getUserInput,taskNumber);
             break;
         case TODO:
-            description = getUserInput.split("todo ");
-            if (description[1].trim().isEmpty()) {
-                throw new IndexOutOfBoundsException();
-            }
-            addTask(new ToDo(description[1]));
-
+             ToDoCommand.execute(getUserInput);
             break;
         case DEADLINE:
-            int by = getUserInput.indexOf("/");
-            separate = getUserInput.split("/by");
-            description = separate[0].trim().split("deadline ");
-            if ((by == -1 && (description[1] != null))
-                    || (separate.length == 1)
-                    || (separate[1].trim().isEmpty())) {
-                throw new DeadlineTimingException();
-            }
-            if (!isValidDateTime(separate[1].trim())) {
-                throw new DateTimeFormatException();
-            } else {
-                LocalDateTime dueDate = LocalDateTime.parse(separate[1].trim(), formatter);
-                addTask(new Deadline(description[1], dueDate));
-            }
+            DeadLineCommand.execute(getUserInput);
             break;
         case EVENT:
-            int at = getUserInput.indexOf("/");
-            separate = getUserInput.split("/at");
-            description = separate[0].trim().split("event ");
-            if ((at == -1 && (description[1] != null))
-                    || (separate.length == 1)
-                    || (separate[1].trim().isEmpty())) {
-                throw new EventTimingException();
-            }
-            if (!isValidDateTime(separate[1].trim())) {
-                throw new DateTimeFormatException();
-            } else {
-                LocalDateTime eventTiming = LocalDateTime.parse(separate[1].trim(), formatter);
-                addTask(new Event(description[1], eventTiming));
-            }
+            EventCommand.execute(getUserInput);
             break;
         case DELETE:
-            description = getUserInput.split(" ");
-            if (description.length < 2 || Integer.parseInt(description[1]) == 0) {
-                throw new InvalidTaskNumberException();
-            }
-            taskNumber = Integer.parseInt(description[1]) - 1;
-            if (tasks.get(taskNumber) == null) {
-                throw new InvalidTaskNumberException();
-            } else {
-                deleteTask(taskNumber);
-            }
+            DeleteCommand.execute(getUserInput,taskNumber);
             break;
         case FIND:
-            description = getUserInput.split("find ");
-            if (description[1].trim().isEmpty()) {
-                throw new IndexOutOfBoundsException();
-            }
-            getMatches(description[1],tasks);
-            int taskId = 0;
-            Ui.printLineTop();
-            Ui.matchesListHeader();
-            if (matches.size() == 0) {
-                Ui.noMatchesMessage();
-            }
-            for (int i = 0; i < matches.size(); i++) {
-                taskId = i + 1;
-                System.out.println(" " + taskId + matches.get(i).printTask());
-            }
-            Ui.printLineBottom();
+            FindCommand.execute(getUserInput);
             break;
         default:
             throw new InvalidCommandException();
