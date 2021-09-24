@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.Duke;
+import duke.exceptions.InvalidTaskNumberException;
 import duke.ui.Ui;
 import duke.exceptions.DukeException;
 import duke.exceptions.InvalidCommandException;
@@ -13,6 +14,10 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
+/**
+ * Represents the Duke task manager where it includes the methods to execute
+ * the user's command while also including add, delete and listing of tasks.
+ */
 public class TaskList {
 
     public static ArrayList<Task> tasks = new ArrayList<>();
@@ -31,6 +36,11 @@ public class TaskList {
     private static final String FIND = "find";
     public static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
 
+    /**
+     * Performs the adding of task to the task list based on its task type.
+     *
+     * @param newTask The task of class {@code Task} which is to be added onto the task list
+     */
     public static void addTask(Task newTask) {
         tasks.add(newTask);
         Storage.saveToFile(Duke.file);
@@ -43,6 +53,7 @@ public class TaskList {
         Ui.printLineBottom();
     }
 
+    /** Lists the tasks to the user on the terminal when user inputs {@code list}. */
     public void listTasks() {
         Ui.printLineTop();
         Ui.taskListHeader();
@@ -57,6 +68,11 @@ public class TaskList {
         Ui.printLineBottom();
     }
 
+    /**
+     * Performs the removing of the specified task from the task list.
+     *
+     * @param taskNumber The task ID of the task which is to be removed from the task list
+     */
     public static void deleteTask(int taskNumber) {
         taskCount = tasks.size() - 1;
         isPlural = tasks.size() != 2;
@@ -68,6 +84,14 @@ public class TaskList {
         Storage.saveToFile(Duke.file);
     }
 
+    /**
+     * Checks if the format of the date and time is correct when
+     * user adds tasks of type {@code Deadline} and {@code Event}.
+     *
+     * @param dateTime The string which the user inputs under the parameter of
+     *                 timing for tasks of type {@code Deadline} and {@code Event}
+     * @return True when the format of the user timing input is correct and false when it's wrong
+     */
     public static boolean isValidDateTime(String dateTime) {
         try {
             LocalDateTime.parse(dateTime, formatter);
@@ -77,16 +101,33 @@ public class TaskList {
         return true;
     }
 
-    public static void getMatches(String search, ArrayList<Task> list) {
+    /**
+     * Gets the tasks which matches the user's query when user inputs {@code find}.
+     *
+     * @param query The string which user inputs to be found from the list of tasks on Duke
+     * @param list The array list of tasks found oen Duke
+     */
+    public static void getMatches(String query, ArrayList<Task> list) {
         matches.clear();
         for(Task task: list) {
-            if (task.description.contains(search)) {
+            if (task.description.contains(query)) {
                 matches.add(task);
             }
         }
     }
 
-    public void executeCommand(String getUserInput, String userCommand) throws DukeException, IOException {
+    /**
+     * Executes the specific commands on the task list on duke.
+     *
+     * @param getUserInput The input given by the user to carry out on tasks list
+     * @param userCommand The specific user command to carry out on the tasks list on duke
+     * @throws DukeException The custom exceptions for specific errors
+     * @throws IOException Signals that an I/O exception of some sort has occurred
+     * @throws InvalidTaskNumberException 1. If the task ID is larger or lower than the
+     * range of the size of the task list. 2. If the task ID is missing from the user input
+     */
+    public void executeCommand(String getUserInput, String userCommand)
+            throws DukeException, IOException, InvalidTaskNumberException {
         int taskNumber = 0;
         switch (userCommand) {
         case EXIT:
@@ -96,22 +137,22 @@ public class TaskList {
             listTasks();
             break;
         case DONE:
-            DoneCommand.execute(getUserInput,taskNumber);
+            DoneCommand.executeUserCommand(getUserInput,taskNumber);
             break;
         case TODO:
-             ToDoCommand.execute(getUserInput);
+             ToDoCommand.executeUserCommand(getUserInput);
             break;
         case DEADLINE:
-            DeadLineCommand.execute(getUserInput);
+            DeadLineCommand.executeUserCommand(getUserInput);
             break;
         case EVENT:
-            EventCommand.execute(getUserInput);
+            EventCommand.executeUserCommand(getUserInput);
             break;
         case DELETE:
-            DeleteCommand.execute(getUserInput,taskNumber);
+            DeleteCommand.executeUserCommand(getUserInput,taskNumber);
             break;
         case FIND:
-            FindCommand.execute(getUserInput);
+            FindCommand.executeUserCommand(getUserInput);
             break;
         default:
             throw new InvalidCommandException();

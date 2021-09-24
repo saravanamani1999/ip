@@ -1,14 +1,24 @@
 package duke.command;
 
 import duke.exceptions.DateTimeFormatException;
+import duke.exceptions.DeadlineTimingException;
 import duke.exceptions.EventTimingException;
 import duke.task.Event;
 
 import java.time.LocalDateTime;
 
-public class EventCommand extends TaskList{
+/** Includes the operations needed to execute {@code event} user command while managing any input errors. */
+public class EventCommand extends TaskList {
 
-    public static void execute(String getUserInput) throws DateTimeFormatException, EventTimingException {
+    /**
+     * Executes the command {@code event} on the task list and adds event tasks to task list.
+     *
+     * @param getUserInput The input given by the user to carry out on tasks list
+     * @throws EventTimingException If the parameter of timing for event is missing
+     * @throws DateTimeFormatException If the event timing does not meet the format: "dd-MM-yyyy HH:mm"
+     */
+    public static void executeUserCommand(String getUserInput)
+            throws DateTimeFormatException, EventTimingException {
         int at = getUserInput.indexOf("/");
         separate = getUserInput.split("/at");
         description = separate[0].trim().split("event ");

@@ -3,11 +3,18 @@ package duke.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/** Represents a {@code Task} which is of type Event where it has a specified event timing. */
 public class Event extends Task {
 
     protected String at;
     LocalDateTime dueTime;
 
+    /**
+     * Constructs a {@code Event} task with the basic information of
+     * its description and the event timing of the task.
+     *
+     * @param description Description of the task found in the task list
+     */
     public Event(String description, LocalDateTime at) {
         super(description);
         this.dueTime = at;

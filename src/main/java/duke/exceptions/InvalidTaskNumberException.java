@@ -2,10 +2,14 @@ package duke.exceptions;
 
 import duke.ui.Ui;
 
-public class InvalidTaskNumberException extends DukeException {
+/**
+ * Custom exception to catch when user input is missing the task number
+ * parameter or if the task number provided is invalid where it is out
+ * of range of the size of the task list.
+ */
+public class InvalidTaskNumberException extends Throwable {
 
-    @Override
-    public void sendMessage() {
+    public static void sendErrorMessage() {
         System.out.println(Ui.HORIZONTAL_LINE_TOP
                 + "\n ☹ OOPS!!! Please input a valid task number.\n"
                 + Ui.HORIZONTAL_LINE_BOTTOM);

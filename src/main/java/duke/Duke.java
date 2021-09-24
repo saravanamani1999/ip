@@ -2,6 +2,7 @@ package duke;
 
 import duke.command.TaskList;
 import duke.exceptions.DukeException;
+import duke.exceptions.InvalidTaskNumberException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.ui.Ui;
@@ -22,7 +23,7 @@ public class Duke {
         ui = new Ui();
         Storage storage = new Storage(filePath);
         taskList = new TaskList();
-        Ui.welcomeMessage();
+        Ui.sendWelcomeMessage();
         try {
             storage.readFile(file, TaskList.tasks);
         } catch (FileNotFoundException e) {
@@ -31,6 +32,11 @@ public class Duke {
         ui.tasksQuantity(TaskList.tasks);
     }
 
+    /**
+     * Method to run the full flow of Duke starting with the welcome message,
+     * followed by running the execution of the user commands and sends the exit message
+     * when the user inputs {@code bye}.
+     */
     private void run() {
         Scanner in = new Scanner(System.in);
         while (!hasUserExited) {
@@ -40,23 +46,22 @@ public class Duke {
                 taskList.executeCommand(fullCommand, userCommand);
             } catch (IndexOutOfBoundsException e) {
                 if (userCommand.equals("done") || userCommand.equals("delete")) {
-                    System.out.println(Ui.HORIZONTAL_LINE_TOP
-                            + "\n ☹ OOPS!!! Please input a valid task number.\n"
-                            + Ui.HORIZONTAL_LINE_BOTTOM);
+                    InvalidTaskNumberException.sendErrorMessage();
                 }
                 else {
                     ui.indexOutOfBoundsMessage(userCommand);
                 }
-
             } catch (NumberFormatException e) {
-                ui.numberFormatMessage();
+                InvalidTaskNumberException.sendErrorMessage();
             } catch (DukeException e) {
-                e.sendMessage();
+                e.sendErrorMessage();
             } catch (IOException e) {
                 Ui.ioExceptionMessage();
+            } catch (InvalidTaskNumberException e) {
+                InvalidTaskNumberException.sendErrorMessage();
             }
         }
-        ui.exitMessage();
+        ui.sendExitMessage();
     }
 
     public static void main(String[] args) {
