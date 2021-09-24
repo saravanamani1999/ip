@@ -3,7 +3,7 @@ package duke.exceptions;
 import duke.ui.Ui;
 
 /**
- * Super class exception which contains the method {@code sendMessage()} which is then
+ * Super class exception which contains the method {@code sendErrorMessage()} which is then
  * overridden by its subclasses to send custom message for each custom exception.
  */
 public class DukeException extends Exception {

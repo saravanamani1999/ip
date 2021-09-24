@@ -17,7 +17,8 @@ public class EventCommand extends TaskList {
      * @throws EventTimingException If the parameter of timing for event is missing
      * @throws DateTimeFormatException If the event timing does not meet the format: "dd-MM-yyyy HH:mm"
      */
-    public static void executeUserCommand(String getUserInput) throws DateTimeFormatException, EventTimingException {
+    public static void executeUserCommand(String getUserInput)
+            throws DateTimeFormatException, EventTimingException {
         int at = getUserInput.indexOf("/");
         separate = getUserInput.split("/at");
         description = separate[0].trim().split("event ");

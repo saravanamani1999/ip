@@ -16,8 +16,8 @@ public class DeadLineCommand extends TaskList {
      * @throws DeadlineTimingException If the parameter of timing for deadline is missing
      * @throws DateTimeFormatException If the deadline timing does not meet the format: "dd-MM-yyyy HH:mm"
      */
-
-    public static void executeUserCommand(String getUserInput) throws DeadlineTimingException, DateTimeFormatException {
+    public static void executeUserCommand(String getUserInput)
+            throws DeadlineTimingException, DateTimeFormatException {
         int by = getUserInput.indexOf("/");
         separate = getUserInput.split("/by");
         description = separate[0].trim().split("deadline ");

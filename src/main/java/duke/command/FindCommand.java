@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.ui.Ui;
 
-/** Includes the operations needed to execute {@code deadline} user command. */
+/** Includes the operations needed to execute {@code find} user command. */
 public class FindCommand extends TaskList {
 
     /**
@@ -10,8 +10,9 @@ public class FindCommand extends TaskList {
      * based on the "description" which represents the user's query.
      *
      * @param getUserInput The input given by the user to carry out on tasks list
+     * @throws IndexOutOfBoundsException If specified index is out of the range of the size of the tasks list
      */
-    public static void executeUserCommand(String getUserInput) {
+    public static void executeUserCommand(String getUserInput) throws IndexOutOfBoundsException {
         description = getUserInput.split("find ");
         if (description[1].trim().isEmpty()) {
             throw new IndexOutOfBoundsException();
