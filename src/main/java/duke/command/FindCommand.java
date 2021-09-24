@@ -2,9 +2,16 @@ package duke.command;
 
 import duke.ui.Ui;
 
-public class FindCommand extends TaskList{
+/** Includes the operations needed to execute {@code deadline} user command. */
+public class FindCommand extends TaskList {
 
-    public static void execute(String getUserInput) {
+    /**
+     * Executes the command {@code find} on the task list and finds matching tasks in the task list
+     * based on the "description" which represents the user's query.
+     *
+     * @param getUserInput The input given by the user to carry out on tasks list
+     */
+    public static void executeUserCommand(String getUserInput) {
         description = getUserInput.split("find ");
         if (description[1].trim().isEmpty()) {
             throw new IndexOutOfBoundsException();

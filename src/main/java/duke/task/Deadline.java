@@ -3,11 +3,18 @@ package duke.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/** Represents a {@code Task} which is of type Deadline where it has a specified deadline. */
 public class Deadline extends Task {
 
     protected LocalDateTime dueTime;
     protected String by;
 
+    /**
+     * Constructs a {@code Deadline} task with the basic information of
+     * its description and the deadline time of the task.
+     *
+     * @param description Description of the task found in the task list
+     */
     public Deadline(String description, LocalDateTime by) {
         super(description);
         this.dueTime = by;

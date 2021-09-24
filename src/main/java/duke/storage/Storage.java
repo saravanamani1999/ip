@@ -1,6 +1,5 @@
 package duke.storage;
 
-import duke.Duke;
 import duke.command.TaskList;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -16,6 +15,11 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Storage class contains the operations required to store
+ * the tasks into a text file and update the task list each
+ * time Duke is launched using the text file.
+ */
 public class Storage {
 
     protected String filePath;
@@ -26,13 +30,28 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Checks if the tasks in the text file is marked as done,
+     * and if it is, it marks that task as done in the Duke task list.
+     *
+     * @param fileContents Array list of the tasks found in the text file
+     * @param tasks Array list of the tasks updated onto Duke when launched
+     * @param taskId The task number of each task
+     */
     public static void checkDone(ArrayList<String> fileContents, ArrayList<Task> tasks, int taskId) {
         if (fileContents.get(taskId).contains("[X]")) {
             tasks.get(taskId).markAsDone();
         }
     }
 
-    public static void updateTasks(ArrayList<Task> tasks, ArrayList<String> fileContents) {
+    /**
+     * Loads the tasks based on what type of task it is from
+     * the text file and updates it onto the Duke task list.
+     *
+     * @param tasks Array list of the tasks updated onto Duke when launched
+     * @param fileContents Array list of the tasks found in the text file
+     */
+    public static void loadTasks(ArrayList<Task> tasks, ArrayList<String> fileContents) {
         for (int i = 0; i < fileContents.size(); i++) {
             if (fileContents.get(i).startsWith("T")) {
                 description = fileContents.get(i).split("]");
@@ -54,6 +73,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads the file when Duke is launched and loads the tasks onto Duke.
+     *
+     * @param filePath File path indicating the location of text file in the directory
+     * @param tasks Array list of the tasks updated onto Duke when launched
+     * @throws FileNotFoundException If the file is not found in the specified location
+     */
     public void readFile(String filePath, ArrayList<Task> tasks) throws FileNotFoundException {
         ArrayList<String> fileContents = new ArrayList<>();
         File f = new File(filePath);
@@ -61,9 +87,14 @@ public class Storage {
         while (s.hasNext()) {
             fileContents.add(s.nextLine());
         }
-        updateTasks(tasks, fileContents);
+        loadTasks(tasks, fileContents);
     }
 
+    /**
+     * Writes to the text file the task which the user has input onto Duke.
+     *
+     * @param filePath File path indicating the location of text file in the directory
+     */
     public static void writeToFile(String filePath) {
         try {
             FileWriter fw = new FileWriter(filePath);
@@ -78,6 +109,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Creates the text file in the specified path in the directory.
+     *
+     * @param filePath File path indicating the location of text file in the directory
+     */
     public static void createFilePath(String filePath) {
         File folder = new File(filePath);
         if (!folder.exists()) {

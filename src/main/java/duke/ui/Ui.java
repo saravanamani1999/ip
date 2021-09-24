@@ -5,6 +5,7 @@ import duke.task.Task;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/** Includes the messages which is communicated to user after the user's inputs. */
 public class Ui {
 
     public static final String HORIZONTAL_LINE_TOP = "\n______________________________" +
@@ -24,7 +25,8 @@ public class Ui {
         System.out.println(HORIZONTAL_LINE_BOTTOM);
     }
 
-    public static void welcomeMessage() {
+    /** Prints the welcome message when user enters Duke. */
+    public static void sendWelcomeMessage() {
         String logo = " DDDDD           kk\n"
                 + " DD  DD  uu   uu kk  kk   eee\n"
                 + " DD   DD uu   uu kkkkk  ee   e\n"
@@ -36,11 +38,13 @@ public class Ui {
                 + " How can I help you?\n" + HORIZONTAL_LINE_BOTTOM);
     }
 
-    public void exitMessage() {
+    /** Prints the exit message when the user inputs {@code bye} and exits duke. */
+    public void sendExitMessage() {
         System.out.println(HORIZONTAL_LINE_TOP + "\n Bye. Hope to see you again soon!\n"
                 + HORIZONTAL_LINE_BOTTOM);
     }
 
+    /** Prints an error message when Duke catches any IO exceptions. */
     public static void ioExceptionMessage() {
         System.out.println(HORIZONTAL_LINE_TOP
                 + "\n ☹ OOPS!!! Something went wrong!." + "\n"
@@ -53,16 +57,16 @@ public class Ui {
                 + HORIZONTAL_LINE_BOTTOM);
     }
 
-    public void numberFormatMessage() {
-        System.out.println(HORIZONTAL_LINE_TOP
-                + "\n ☹ OOPS!!! Please input a valid task number to mark it as done.\n"
-                + HORIZONTAL_LINE_BOTTOM);
-    }
-
+    /** Prints error message when the text file saving the tasks is not found in specified file path. */
     public void fileNotFoundMessage() {
         System.out.print(" File not found\n" + HORIZONTAL_LINE_BOTTOM);
     }
 
+    /**
+     * Prints the number of tasks found in the task list.
+     *
+     * @param tasks Array list of the tasks updated onto Duke when launched
+     */
     public void tasksQuantity(ArrayList<Task> tasks) {
         if (tasks.size() == 0) {
             System.out.println(" No tasks found in the task file\n" + HORIZONTAL_LINE_BOTTOM);
@@ -72,22 +76,31 @@ public class Ui {
         }
     }
 
+    /** Prints the message of acknowledgement when the task is marked as done. */
     public static void markedAsDone() {
-        System.out.println(HORIZONTAL_LINE_TOP + "\n I've already marked the task as done!\n" + HORIZONTAL_LINE_BOTTOM);
+        System.out.println(HORIZONTAL_LINE_TOP + "\n I've already marked the task as done!\n"
+                + HORIZONTAL_LINE_BOTTOM);
     }
 
+    /** Prints the message to user when there are no tasks in the text file or duke task list. */
     public static void noTasks() {
         System.out.println(" You have no tasks!");
     }
 
+    /** Prints the header part of the acknowledgement message when user inputs {@code list}. */
     public static void taskListHeader() {
         System.out.println(" Here are the tasks in your list:");
     }
 
+    /** Prints the header part of the acknowledgement message when user inputs {@code find}. */
     public static void matchesListHeader() {
         System.out.println(" Here are the matching tasks in your list:");
     }
 
+    /**
+     * Prints the message when there are no tasks found which matches the
+     * query of the user when the user inputs {@code find}.
+     */
     public static void noMatchesMessage() {
         System.out.println("\n ☹ There are no matching tasks found!");
     }
