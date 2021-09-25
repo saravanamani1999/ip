@@ -53,17 +53,17 @@ ____________________________________________________________
      * STATUS_ICON is `X` if it is marked as done or empty if it is not.
      * TASK_DESCRIPTION is the description of the task when it gets added.
      * DATE_TIME (only applicable to deadline and event) must have the following format:`dd-mm-yyyy HH:mm` 
-     where time is in 24-hour format
+     where time is in 24-hour format.
 
 ## Features and Usage of Commands
 
 ### Adding a task without any date and time parameters: `todo`  
 
-Adds a task without any date and time parameters to the task list
+Adds a task without any date and time parameters to the task list.
 
 Format of command: `todo TASK_DESCRIPTION`
 
-* Ensure `TASK_DESCRIPTION` is not empty
+* Ensure `TASK_DESCRIPTION` is not empty.
 
 Examples:
 
@@ -81,13 +81,13 @@ ____________________________________________________________
 ```
 ### Adding a task with a deadline: `deadline` 
 
-Adds a task with a specified deadline where it includes date and time of the deadline
+Adds a task with a specified deadline where it includes date and time of the deadline.
 
 Format of command: `deadline TASK_DESCRIPTION /by DATE_TIME`
 
-* Ensure `TASK_DESCRIPTION` and `DATE_TIME` is not empty
-* Ensure the `DATE_TIME` follows the format: `dd-mm-yyyy HH:mm`
-  * `dd` is the day 
+* Ensure `TASK_DESCRIPTION` and `DATE_TIME` is not empty.
+* Ensure the `DATE_TIME` follows the format: `dd-mm-yyyy HH:mm`.
+  * `dd` is the day
   * `mm` is the month
   * `yyyy` is the year
   * `HH` is the hour part of the timing in 24-hour format
@@ -109,12 +109,12 @@ ____________________________________________________________
 ```
 ### Adding a task with an event timing: `event` 
 
-Adds a task with a specified event timing where it includes date and time of the event
+Adds a task with a specified event timing where it includes date and time of the event.
 
 Format of command: `event TASK_DESCRIPTION /at DATE_TIME`
 
-* Ensure `TASK_DESCRIPTION` and `DATE_TIME` is not empty
-* Ensure the `DATE_TIME` follows the format: `dd-mm-yyyy HH:mm`
+* Ensure `TASK_DESCRIPTION` and `DATE_TIME` is not empty.
+* Ensure the `DATE_TIME` follows the format: `dd-mm-yyyy HH:mm`.
   * `dd` is the day
   * `mm` is the month
   * `yyyy` is the year
@@ -141,10 +141,10 @@ ____________________________________________________________
 Finds a task in the task list based on user's query of the task description.
 
 Format of command: `find QUERY`
-* The search is case-sensitive. e.g `Book` will not match `book`
-* Only the description of task is searched
-* Only full words will be matched e.g `book` will not match `books`
-* The order of the query is important e.g `team meeting` will not match `meeting team`
+* The search is case-sensitive. e.g `Book` will not match `book`.
+* Only the description of task is searched.
+* Only full words will be matched e.g `book` will not match `books`.
+* The order of the query is important e.g `team meeting` will not match `meeting team`.
 
 Examples:
 
