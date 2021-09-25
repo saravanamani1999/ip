@@ -29,12 +29,12 @@ public class Deadline extends Task {
     }
 
     public String printDone() {
-        return HORIZONTAL_LINE+ " Nice! I've marked this task as done:\n   [" + getTaskType() + "]["
-                + getStatusIcon() + "] " + description + " (by: " + by + ")" + HORIZONTAL_LINE;
+        return horizontalLine + " Nice! I've marked this task as done:\n   [" + getTaskType() + "]["
+                + getStatusIcon() + "] " + description + " (by: " + by + ")" + horizontalLine;
     }
 
     public String printDelete() {
-        return HORIZONTAL_LINE+ " Noted. I've removed this task:\n   [" + getTaskType() + "]["
+        return horizontalLine + " Noted. I've removed this task:\n   [" + getTaskType() + "]["
                 + getStatusIcon() + "] " + description + " (by: " + by + ")";
     }
 

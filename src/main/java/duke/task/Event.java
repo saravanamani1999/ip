@@ -29,12 +29,12 @@ public class Event extends Task {
     }
 
     public String printDone() {
-        return HORIZONTAL_LINE + " Nice! I've marked this task as done:\n   [" + getTaskType() + "]["
-                + getStatusIcon() + "] " + description + " (at: " + at + ")" + HORIZONTAL_LINE;
+        return horizontalLine + " Nice! I've marked this task as done:\n   [" + getTaskType() + "]["
+                + getStatusIcon() + "] " + description + " (at: " + at + ")" + horizontalLine;
     }
 
     public String printDelete() {
-        return HORIZONTAL_LINE + " Noted. I've removed this task:\n   [" + getTaskType() + "]["
+        return horizontalLine + " Noted. I've removed this task:\n   [" + getTaskType() + "]["
                 + getStatusIcon() + "] " + description + " (at: " + at + ")";
     }
 

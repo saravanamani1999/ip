@@ -1,4 +1,5 @@
-D [ ] read book by: 2020-02-12T18:30
-D [ ] return book by: 1999-02-12T18:20
-E [ ] return book at: 2020-02-12T13:20
-E [ ] read book at: 2020-02-11T10:30
+T [X] read book
+E [X] borrow book at: nus sat 6pm
+T [X] read another book
+D [X] finish book by: tonight 11pm
+
