@@ -1,4 +1,4 @@
-package duke.task;
+package main.java.duke.task;
 
 /** Represents the parent task of Deadline, Event and ToDo. */
 public class Task {

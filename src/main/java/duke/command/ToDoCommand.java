@@ -1,6 +1,6 @@
-package duke.command;
+package main.java.duke.command;
 
-import duke.task.ToDo;
+import main.java.duke.task.ToDo;
 
 /** Includes the operations needed to execute {@code todo} user command. */
 public class ToDoCommand extends TaskList {

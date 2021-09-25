@@ -1,6 +1,6 @@
-package duke.exceptions;
+package main.java.duke.exceptions;
 
-import duke.ui.Ui;
+import main.java.duke.ui.Ui;
 
 /** Custom exception to catch any unfamiliar command words in the user input. */
 public class InvalidCommandException extends DukeException {

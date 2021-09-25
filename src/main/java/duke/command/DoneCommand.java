@@ -1,9 +1,11 @@
-package duke.command;
+package main.java.duke.command;
 
-import duke.Duke;
-import duke.exceptions.InvalidTaskNumberException;
-import duke.storage.Storage;
-import duke.ui.Ui;
+
+import main.java.duke.exceptions.InvalidTaskNumberException;
+import main.java.duke.storage.Storage;
+import main.java.duke.ui.Ui;
+import main.java.duke.Duke;
+
 
 /** Includes the operations needed to execute {@code done} user command while managing any input errors. */
 public class DoneCommand extends TaskList {

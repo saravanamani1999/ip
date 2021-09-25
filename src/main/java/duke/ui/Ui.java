@@ -1,6 +1,6 @@
-package duke.ui;
+package main.java.duke.ui;
 
-import duke.task.Task;
+import main.java.duke.task.Task;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -51,6 +51,11 @@ public class Ui {
                 + HORIZONTAL_LINE_BOTTOM);
     }
 
+    /**
+     * Prints error message when the description of the task in the user input is missing
+     *
+     * @param command The user's command word in the string
+     */
     public void indexOutOfBoundsMessage(String command) {
         System.out.println(HORIZONTAL_LINE_TOP
                 + "\n ☹ OOPS!!! The description of a " + command + " cannot be empty.\n"

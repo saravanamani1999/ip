@@ -1,33 +1,32 @@
-package duke.command;
+package main.java.duke;
 
-import duke.exceptions.DukeException;
-<<<<<<< HEAD
-import duke.exceptions.InvalidTaskNumberException;
-import duke.parser.Parser;
-import duke.storage.Storage;
-import duke.ui.Ui;
-=======
-import duke.task.Task;
->>>>>>> master
+import main.java.duke.command.TaskList;
+import main.java.duke.exceptions.DukeException;
+import main.java.duke.exceptions.InvalidTaskNumberException;
+import main.java.duke.parser.Parser;
+import main.java.duke.storage.Storage;
+import main.java.duke.ui.Ui;
+import main.java.duke.task.Task;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/** Wrapper class which integrates all the classes and methods to run Duke. */
 public class Duke {
-    public static final String HORIZONTAL_LINE_TOP = "\n______________________________" +
-            "______________________________\n";
-    public static final String HORIZONTAL_LINE_BOTTOM = "_______________________________" +
-            "_____________________________\n";
-    private static boolean hasUserExited = false;
+    public static boolean hasUserExited = false;
     public static ArrayList<Task> tasks = new ArrayList<>();
     public static String file = "data/duke.txt";
     private static TaskList taskList;
     private static Ui ui;
 
+    /**
+     * Constructs {@code Duke} to integrate all the dependent classes and run Duke successfully.
+     *
+     * @param filePath File path indicating the location of text file in the directory
+     */
     public Duke(String filePath) {
         ui = new Ui();
         Storage storage = new Storage(filePath);
@@ -53,14 +52,7 @@ public class Duke {
             String userCommand = Parser.getCommandWord(fullCommand);
             try {
                 taskList.executeCommand(fullCommand, userCommand);
-            } catch (IndexOutOfBoundsException e) {
-                if (userCommand.equals("done") || userCommand.equals("delete")) {
-                    InvalidTaskNumberException.sendErrorMessage();
-                }
-                else {
-                    ui.indexOutOfBoundsMessage(userCommand);
-                }
-            } catch (NumberFormatException e) {
+            }  catch (NumberFormatException e) {
                 InvalidTaskNumberException.sendErrorMessage();
             } catch (DukeException e) {
                 e.sendErrorMessage();
@@ -68,6 +60,13 @@ public class Duke {
                 Ui.ioExceptionMessage();
             } catch (InvalidTaskNumberException e) {
                 InvalidTaskNumberException.sendErrorMessage();
+            } catch (IndexOutOfBoundsException e) {
+                if (userCommand.equals("done") || userCommand.equals("delete")) {
+                    InvalidTaskNumberException.sendErrorMessage();
+                }
+                else {
+                    ui.indexOutOfBoundsMessage(userCommand);
+                }
             }
         }
         ui.sendExitMessage();

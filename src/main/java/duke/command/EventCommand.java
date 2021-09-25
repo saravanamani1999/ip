@@ -1,9 +1,9 @@
-package duke.command;
+package main.java.duke.command;
 
-import duke.exceptions.DateTimeFormatException;
-import duke.exceptions.DeadlineTimingException;
-import duke.exceptions.EventTimingException;
-import duke.task.Event;
+import main.java.duke.exceptions.DateTimeFormatException;
+import main.java.duke.exceptions.DeadlineTimingException;
+import main.java.duke.exceptions.EventTimingException;
+import main.java.duke.task.Event;
 
 import java.time.LocalDateTime;
 

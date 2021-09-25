@@ -1,12 +1,12 @@
-package duke.command;
+package main.java.duke.command;
 
-import duke.Duke;
-import duke.exceptions.InvalidTaskNumberException;
-import duke.ui.Ui;
-import duke.exceptions.DukeException;
-import duke.exceptions.InvalidCommandException;
-import duke.task.Task;
-import duke.storage.Storage;
+import main.java.duke.Duke;
+import main.java.duke.exceptions.InvalidTaskNumberException;
+import main.java.duke.ui.Ui;
+import main.java.duke.exceptions.DukeException;
+import main.java.duke.exceptions.InvalidCommandException;
+import main.java.duke.task.Task;
+import main.java.duke.storage.Storage;
 
 import java.io.IOException;
 import java.time.LocalDateTime;

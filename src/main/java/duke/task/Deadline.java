@@ -1,4 +1,4 @@
-package duke.task;
+package main.java.duke.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -36,12 +36,12 @@ public class Deadline extends Task {
     }
 
     public String printDone() {
-        return horizontalLine + " Nice! I've marked this task as done:\n   [" + getTaskType() + "]["
-                + getStatusIcon() + "] " + description + " (by: " + by + ")" + horizontalLine;
+        return HORIZONTAL_LINE + " Nice! I've marked this task as done:\n   [" + getTaskType() + "]["
+                + getStatusIcon() + "] " + description + " (by: " + by + ")" + HORIZONTAL_LINE;
     }
 
     public String printDelete() {
-        return horizontalLine + " Noted. I've removed this task:\n   [" + getTaskType() + "]["
+        return HORIZONTAL_LINE + " Noted. I've removed this task:\n   [" + getTaskType() + "]["
                 + getStatusIcon() + "] " + description + " (by: " + by + ")";
     }
 

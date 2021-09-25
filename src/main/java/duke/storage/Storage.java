@@ -1,17 +1,18 @@
-package duke.storage;
+package main.java.duke.storage;
 
-import duke.command.TaskList;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
-import duke.ui.Ui;
+import main.java.duke.command.TaskList;
+import main.java.duke.task.Deadline;
+import main.java.duke.task.Event;
+import main.java.duke.task.Task;
+import main.java.duke.task.ToDo;
+import main.java.duke.ui.Ui;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -26,6 +27,11 @@ public class Storage {
     protected static String[] description;
     protected static String[] separate;
 
+    /**
+     * Constructs {@code Storage} to be able to store the tasks into a text file specified by the file path.
+     *
+     * @param filePath File path indicating the location of text file in the directory
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
@@ -87,7 +93,12 @@ public class Storage {
         while (s.hasNext()) {
             fileContents.add(s.nextLine());
         }
-        loadTasks(tasks, fileContents);
+        try {
+            loadTasks(tasks, fileContents);
+        } catch (DateTimeParseException e) {
+            System.out.println(" Please check your duke text file as the formatting" +
+                    "\n of the date and time are incorrect");
+        }
     }
 
     /**

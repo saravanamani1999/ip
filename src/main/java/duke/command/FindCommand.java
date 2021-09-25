@@ -1,6 +1,6 @@
-package duke.command;
+package main.java.duke.command;
 
-import duke.ui.Ui;
+import main.java.duke.ui.Ui;
 
 /** Includes the operations needed to execute {@code find} user command. */
 public class FindCommand extends TaskList {

@@ -1,6 +1,6 @@
-package duke.exceptions;
+package main.java.duke.exceptions;
 
-import duke.ui.Ui;
+import main.java.duke.ui.Ui;
 
 /**
  * Super class exception which contains the method {@code sendErrorMessage()} which is then

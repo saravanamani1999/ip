@@ -1,6 +1,6 @@
-package duke.exceptions;
+package main.java.duke.exceptions;
 
-import duke.ui.Ui;
+import main.java.duke.ui.Ui;
 
 /** Custom exception to catch missing deadline timings in the user input. */
 public class DeadlineTimingException extends DukeException {

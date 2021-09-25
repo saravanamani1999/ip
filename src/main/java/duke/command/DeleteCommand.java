@@ -1,6 +1,6 @@
-package duke.command;
+package main.java.duke.command;
 
-import duke.exceptions.InvalidTaskNumberException;
+import main.java.duke.exceptions.InvalidTaskNumberException;
 
 /** Includes the operations needed to execute {@code delete} user command while managing any input errors. */
 public class DeleteCommand extends TaskList {

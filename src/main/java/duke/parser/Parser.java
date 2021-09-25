@@ -1,4 +1,4 @@
-package duke.parser;
+package main.java.duke.parser;
 
 /** Parses the given user command to make sense of it by getting the key user command. */
 public class Parser {

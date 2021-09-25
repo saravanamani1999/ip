@@ -1,4 +1,4 @@
-package duke.task;
+package main.java.duke.task;
 
 /** Represents a {@code Task} which is of type ToDo. */
 public class ToDo extends Task {
@@ -22,8 +22,8 @@ public class ToDo extends Task {
     }
 
     public String printDone() {
-        return horizontalLine + " Nice! I've marked this task as done:\n   [" + getTaskType() + "]["
-                + getStatusIcon() + "] " + description + horizontalLine;
+        return HORIZONTAL_LINE + " Nice! I've marked this task as done:\n   [" + getTaskType() + "]["
+                + getStatusIcon() + "] " + description + HORIZONTAL_LINE;
     }
 
     public String fileContent() {
