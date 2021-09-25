@@ -1,12 +1,17 @@
 package duke.task;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task {
 
     protected String at;
+    LocalDateTime dueTime;
 
-    public Event(String description, String at) {
+    public Event(String description, LocalDateTime at) {
         super(description);
-        this.at = at;
+        this.dueTime = at;
+        this.at = at.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a"));
     }
 
     public String getTaskType() {
@@ -24,17 +29,17 @@ public class Event extends Task {
     }
 
     public String printDone() {
-        return HORIZONTAL_LINE + " Nice! I've marked this task as done:\n   [" + getTaskType() + "]["
-                + getStatusIcon() + "] " + description + " (at: " + at + ")" + HORIZONTAL_LINE;
+        return horizontalLine + " Nice! I've marked this task as done:\n   [" + getTaskType() + "]["
+                + getStatusIcon() + "] " + description + " (at: " + at + ")" + horizontalLine;
     }
 
     public String printDelete() {
-        return HORIZONTAL_LINE + " Noted. I've removed this task:\n   [" + getTaskType() + "]["
+        return horizontalLine + " Noted. I've removed this task:\n   [" + getTaskType() + "]["
                 + getStatusIcon() + "] " + description + " (at: " + at + ")";
     }
 
     public String fileContent() {
-        return "E [" + getStatusIcon() + "] " + description + " at: " + at;
+        return "E [" + getStatusIcon() + "] " + description + " at: " + dueTime;
     }
 
 }

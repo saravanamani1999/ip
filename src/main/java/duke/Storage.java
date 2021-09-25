@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -37,13 +38,13 @@ public class Storage {
             } else if (fileContents.get(i).startsWith("D")) {
                 separate = fileContents.get(i).split("by:");
                 description = separate[0].trim().split("]");
-                String dueDate = separate[1].trim();
+                LocalDateTime dueDate = LocalDateTime.parse(separate[1].trim());
                 tasks.add(new Deadline(description[1].trim(), dueDate));
                 checkDone(fileContents, tasks, i);
             } else if (fileContents.get(i).startsWith("E")) {
                 separate = fileContents.get(i).split("at:");
                 description = separate[0].trim().split("]");
-                String eventTiming = separate[1].trim();
+                LocalDateTime eventTiming = LocalDateTime.parse(separate[1].trim());
                 tasks.add(new Event(description[1].trim(), eventTiming));
                 checkDone(fileContents, tasks, i);
             }
