@@ -281,12 +281,12 @@ ____________________________________________________________
 ____________________________________________________________
 ```
 
-## Data Storage
+## Data Storage in `duke.txt`
 
-Duke automatically saves all the tasks to a text file after each command which alters the task list.
-This means the users can recover their tasks even after restarting `Duke`.
+Duke automatically saves all the tasks to a text file after each command which modifies the task list.
+This means the users can recover their tasks even after relaunching `Duke`.
 
-### Editing the data text file
+### Editing `duke.txt`
 
 It's highly advisable that beginner users do not edit any part of this file as if the data is not stored in the 
 required format it might cause `Duke` to crash.
