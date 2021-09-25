@@ -3,10 +3,25 @@
 `Duke` is a Personal Assistant Chat bot that is designed 
 to help users manage their tasks on the Command Line Interface (CLI).
 
+* [Quick Start](#quick-start)
+* [List of Commands](#list-of-commands)
+  * [Notes about command format](#notes-about-command-format)
+* [Features](#features-and-usage-of-commands)
+  * [todo](#adding-a-task-without-any-date-and-time-parameters-todo)
+  * [deadline](#adding-a-task-with-a-deadline-deadline)
+  * [event](#adding-a-task-with-an-event-timing-event)
+  * [find](#finding-a-task-from-task-list--find)
+  * [list](#listing-all-tasks-list)
+  * [done](#marking-a-task-as-done-done)
+  * [delete](#deleting-a-task-delete)
+  * [bye](#exiting-duke-bye)
+* [Data Storage](#data-storage-in-duketxt)
+  * [Editing storage file](#editing-duketxt)
+
 ## Quick Start
 
 1. Ensure you have Java 11 installed in your computer.
-1. Download the latest version of `Duke` [here!]()
+1. Download the latest version of `Duke` [here!](https://github.com/saravanamani1999/ip/releases/tag/A-Jar)
 1. Copy the `ip.jar` to an empty folder
 1. On command line, navigate to the folder where `Duke` is stored
 1. Launch the `ip.jar` folder by running `java -jar ip.jar`
@@ -30,7 +45,7 @@ ____________________________________________________________
 ____________________________________________________________
 ```
 
-## Command List
+## List of Commands
 
 | Command    	| Action                                       	        | Command Format                              	|
 |------------	|----------------------------------------------------	|---------------------------------------------	|
