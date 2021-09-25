@@ -1,79 +1,23 @@
 package duke.command;
 
-import duke.Duke;
-import duke.Ui;
-import duke.exceptions.*;
 import duke.task.Deadline;
 import duke.task.Event;
-import duke.task.Task;
-import duke.Storage;
 import duke.task.ToDo;
+import duke.exceptions.DukeException;
+import duke.exceptions.InvalidCommandException;
+import duke.exceptions.InvalidTaskNumberException;
+import duke.exceptions.EventTimingException;
+import duke.exceptions.DeadlineTimingException;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
-public class TaskList {
+public class GetTasks extends DukeCommand {
 
-    public ArrayList<Task> tasks = new ArrayList<>();
-    protected static int taskCount = 0;
-    protected static String[] description;
-    protected static String[] separate;
-    public static boolean isPlural = false;
-    public static final String LIST = "list";
-    public static final String EXIT = "bye";
-    public static final String TODO = "todo";
-    public static final String DEADLINE = "deadline";
-    public static final String EVENT = "event";
-    public static final String DONE = "done";
-    public static final String DELETE = "delete";
-
-    public void addTask(Task newTask) {
-        tasks.add(newTask);
-        Storage.saveToFile(Duke.file);
-        taskCount = tasks.size();
-        if (taskCount > 1) {
-            isPlural = true;
-        }
-        System.out.println(newTask.printOk() + taskCount + (isPlural ? " tasks" : " task")
-                + " in the list.");
-        Ui.printLineBottom();
-    }
-
-    public void listTasks() {
-        Ui.printLineTop();
-        Ui.taskListHeader();
-        if(tasks.size() == 0) {
-            Ui.noTasks();
-        }
+    public static void followCommand(String getUserInput) throws DukeException, IOException {
         int taskNumber;
-        for (int i = 0; i < tasks.size(); i++) {
-            taskNumber = i + 1;
-            System.out.println(" " + taskNumber + tasks.get(i).printTask());
-        }
-        Ui.printLineBottom();
-    }
-
-    public  void deleteTask(int taskNumber) {
-        taskCount = tasks.size() - 1;
-        isPlural = tasks.size() != 2;
-        System.out.println(" " + tasks.get(taskNumber).printDelete() + "\nNow you have "
-                + taskCount + (isPlural ? " tasks" : " task")
-                + " in the list.");
-        Ui.printLineBottom();
-        tasks.remove(taskNumber);
-        Storage.saveToFile(Duke.file);
-    }
-
-    public void executeCommand(String getUserInput, String userCommand) throws DukeException, IOException {
-        int taskNumber;
+        String userCommand = (getUserInput.split(" "))[0];
         switch (userCommand) {
-        case EXIT:
-            Duke.hasUserExited = true;
-            break;
-        case LIST:
-            listTasks();
-            break;
-        case DONE:
+        case "done":
             description = getUserInput.split("done ");
             if (description.length < 2 || Integer.parseInt(description[1]) == 0) {
                 throw new InvalidTaskNumberException();
@@ -83,14 +27,16 @@ public class TaskList {
                 throw new InvalidTaskNumberException();
             }
             if (tasks.get(taskNumber).getStatusIcon().equals("X")) {
-                Ui.markedAsDone();
+                System.out.println(HORIZONTAL_LINE_TOP
+                        + " I've already marked the task as done!\n"
+                        + HORIZONTAL_LINE_BOTTOM);
             } else {
                 tasks.get(taskNumber).markAsDone();
-                Storage.saveToFile(Duke.file);
+                saveToFile(file);
                 System.out.println(tasks.get(taskNumber).printDone());
             }
             break;
-        case TODO:
+        case "todo":
             description = getUserInput.split("todo ");
             if (description[1].trim().isEmpty()) {
                 throw new IndexOutOfBoundsException();
@@ -98,7 +44,7 @@ public class TaskList {
             addTask(new ToDo(description[1]));
 
             break;
-        case DEADLINE:
+        case "deadline":
             int by = getUserInput.indexOf("/");
             separate = getUserInput.split("/by");
             description = separate[0].trim().split("deadline ");
@@ -110,7 +56,7 @@ public class TaskList {
             String dueDate = separate[1].trim();
             addTask(new Deadline(description[1], dueDate));
             break;
-        case EVENT:
+        case "event":
             int at = getUserInput.indexOf("/");
             separate = getUserInput.split("/at");
             description = separate[0].trim().split("event ");
@@ -122,7 +68,7 @@ public class TaskList {
             String eventTiming = separate[1].trim();
             addTask(new Event(description[1], eventTiming));
             break;
-        case DELETE:
+        case "delete":
             description = getUserInput.split(" ");
             if (description.length < 2 || Integer.parseInt(description[1]) == 0) {
                 throw new InvalidTaskNumberException();
@@ -140,5 +86,4 @@ public class TaskList {
     }
 
 }
-
 
