@@ -1,4 +1,3 @@
-
 T [X] read book
 E [X] borrow book at: nus sat 6pm
 T [X] read another book
