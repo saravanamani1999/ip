@@ -150,10 +150,10 @@ ____________________________________________________________
 Finds a task in the task list based on user's query of the task description.
 
 Format of command: `find QUERY`
-* The search is case-sensitive. e.g `Book` will not match `book`.
+* The search is case-sensitive. e.g. `Book` will not match `book`.
 * Only the description of task is searched.
-* Only full words will be matched e.g `book` will not match `books`.
-* The order of the query is important e.g `team meeting` will not match `meeting team`.
+* Only full words will be matched e.g. `book` will not match `books`.
+* The order of the query is important e.g. `team meeting` will not match `meeting team`.
 
 Examples:
 
