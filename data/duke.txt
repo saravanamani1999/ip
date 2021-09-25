@@ -1,2 +1,3 @@
-T [X] read book
-E [ ] borrow book at: 2019-10-20T14:30
+T [X] read a book
+E [ ] attend project meeting at: 2021-10-21T23:59
+T [ ] finish book

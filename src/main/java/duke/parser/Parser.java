@@ -1,5 +1,7 @@
 package main.java.duke.parser;
 
+import java.util.Locale;
+
 /** Parses the given user command to make sense of it by getting the key user command. */
 public class Parser {
 

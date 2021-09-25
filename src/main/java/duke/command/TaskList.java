@@ -103,7 +103,7 @@ public class TaskList {
     }
 
     /**
-     * Gets the tasks which matches the user's query when user inputs {@code find}.
+     * Gets the tasks with the description which matches the user's query when user inputs {@code find}.
      *
      * @param query The string which user inputs to be found from the list of tasks on Duke
      * @param list The array list of tasks found oen Duke
