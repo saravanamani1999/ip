@@ -1,12 +1,15 @@
 package duke.exceptions;
 
+import duke.ui.Ui;
+
+/** Custom exception to catch missing deadline timings in the user input. */
 public class DeadlineTimingException extends DukeException {
 
     @Override
-    public void sendMessage() {
-        System.out.println(DukeException.HORIZONTAL_LINE_TOP
-                + " ☹ OOPS!!! The deadline timing is missing.\n"
-                + DukeException.HORIZONTAL_LINE_BOTTOM);
+    public void sendErrorMessage() {
+        System.out.println(Ui.HORIZONTAL_LINE_TOP
+                + "\n ☹ OOPS!!! The deadline timing is missing.\n"
+                + Ui.HORIZONTAL_LINE_BOTTOM);
     }
 
 }

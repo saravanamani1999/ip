@@ -1,16 +1,17 @@
 package duke.exceptions;
 
+import duke.ui.Ui;
+
+/**
+ * Super class exception which contains the method {@code sendErrorMessage()} which is then
+ * overridden by its subclasses to send custom message for each custom exception.
+ */
 public class DukeException extends Exception {
 
-    protected static final String HORIZONTAL_LINE_TOP = "\n______________________________" +
-            "______________________________\n";
-    protected static final String HORIZONTAL_LINE_BOTTOM = "_______________________________" +
-            "_____________________________\n";
-
-    public void sendMessage() {
-        System.out.println(HORIZONTAL_LINE_TOP
-                + " ☹ OOPS!!! ...Error message...\n"
-                + HORIZONTAL_LINE_BOTTOM);
+    public void sendErrorMessage() {
+        System.out.println(Ui.HORIZONTAL_LINE_TOP
+                + "\n ☹ OOPS!!! ...Error message...\n"
+                + Ui.HORIZONTAL_LINE_BOTTOM);
     }
 
 }

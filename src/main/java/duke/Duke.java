@@ -1,7 +1,14 @@
 package duke.command;
 
 import duke.exceptions.DukeException;
+<<<<<<< HEAD
+import duke.exceptions.InvalidTaskNumberException;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.ui.Ui;
+=======
 import duke.task.Task;
+>>>>>>> master
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -18,83 +25,56 @@ public class Duke {
     private static boolean hasUserExited = false;
     public static ArrayList<Task> tasks = new ArrayList<>();
     public static String file = "data/duke.txt";
+    private static TaskList taskList;
+    private static Ui ui;
 
-    public static void checkFilePath(String filePath) {
-        File folder = new File(filePath);
-        if (!folder.exists()) {
-            folder.getParentFile().mkdirs();
-        }
-    }
-
-    public static void saveToFile(String filePath) {
-        checkFilePath(filePath);
+    public Duke(String filePath) {
+        ui = new Ui();
+        Storage storage = new Storage(filePath);
+        taskList = new TaskList();
+        Ui.sendWelcomeMessage();
         try {
-            DukeCommand.writeToFile(filePath);
-        } catch (IOException e) {
-            System.out.println(HORIZONTAL_LINE_TOP + " ☹ OOPS!!! Something went wrong!.\n"
-                    + HORIZONTAL_LINE_BOTTOM);
+            storage.readFile(file, TaskList.tasks);
+        } catch (FileNotFoundException e) {
+            ui.fileNotFoundMessage();
         }
+        ui.tasksQuantity(TaskList.tasks);
     }
 
-    public static void exitMessage() {
-        System.out.println(HORIZONTAL_LINE_TOP + " Bye. Hope to see you again soon!\n"
-                + HORIZONTAL_LINE_BOTTOM);
+    /**
+     * Method to run the full flow of Duke starting with the welcome message,
+     * followed by running the execution of the user commands and sends the exit message
+     * when the user inputs {@code bye}.
+     */
+    private void run() {
+        Scanner in = new Scanner(System.in);
+        while (!hasUserExited) {
+            String fullCommand = ui.readCommand(in);
+            String userCommand = Parser.getCommandWord(fullCommand);
+            try {
+                taskList.executeCommand(fullCommand, userCommand);
+            } catch (IndexOutOfBoundsException e) {
+                if (userCommand.equals("done") || userCommand.equals("delete")) {
+                    InvalidTaskNumberException.sendErrorMessage();
+                }
+                else {
+                    ui.indexOutOfBoundsMessage(userCommand);
+                }
+            } catch (NumberFormatException e) {
+                InvalidTaskNumberException.sendErrorMessage();
+            } catch (DukeException e) {
+                e.sendErrorMessage();
+            } catch (IOException e) {
+                Ui.ioExceptionMessage();
+            } catch (InvalidTaskNumberException e) {
+                InvalidTaskNumberException.sendErrorMessage();
+            }
+        }
+        ui.sendExitMessage();
     }
 
     public static void main(String[] args) {
-        String logo = " DDDDD           kk\n"
-                + " DD  DD  uu   uu kk  kk   eee\n"
-                + " DD   DD uu   uu kkkkk  ee   e\n"
-                + " DD   DD uu   uu kk kk  eeeee\n"
-                + " DDDDDD   uuuu u kk  kk  eeeee\n";
-        System.out.println(" Hello from\n\n" + logo);
-        System.out.print(HORIZONTAL_LINE_TOP
-                + " Hello! I'm duke.command.Duke, your friendly neighbourhood task manager!\n"
-                + " How can I help you?\n" + HORIZONTAL_LINE_BOTTOM);
-        try {
-            DukeCommand.readFile(file, tasks);
-        } catch (FileNotFoundException e) {
-            System.out.print(" File not found\n" + HORIZONTAL_LINE_BOTTOM);
-        }
-        if (tasks.size() == 0) {
-            System.out.println(" No tasks found in the task file\n" + HORIZONTAL_LINE_BOTTOM);
-        } else {
-            System.out.println(" You have " + tasks.size()
-                    +  " tasks.\n" + HORIZONTAL_LINE_BOTTOM);
-        }
-
-        String getUserInput;
-        Scanner in = new Scanner(System.in);
-
-        while (!hasUserExited) {
-            getUserInput = in.nextLine();
-            String[] separate;
-            separate = getUserInput.split(" ");
-            String command;
-            command = separate[0];
-            if (getUserInput.equals("bye")) {
-                hasUserExited = true;
-            } else {
-                try {
-                    DukeCommand.getCommand(getUserInput);
-                } catch (IndexOutOfBoundsException e) {
-                    System.out.println(HORIZONTAL_LINE_TOP
-                            + " ☹ OOPS!!! The description of a " + command + " cannot be empty.\n"
-                            + HORIZONTAL_LINE_BOTTOM);
-                } catch (NumberFormatException e) {
-                    System.out.println(HORIZONTAL_LINE_TOP
-                            + " ☹ OOPS!!! Please input a valid task number to mark it as done.\n"
-                            + HORIZONTAL_LINE_BOTTOM);
-                } catch (DukeException e) {
-                    e.sendMessage();
-                } catch (IOException e) {
-                    System.out.println(HORIZONTAL_LINE_TOP
-                            + " ☹ OOPS!!! Something went wrong!." + "\n"
-                            + HORIZONTAL_LINE_BOTTOM);
-                }
-            }
-        }
-        exitMessage();
+        new Duke(file).run();
     }
 
 }

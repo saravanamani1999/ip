@@ -2,4 +2,3 @@ T [X] read book
 E [X] borrow book at: nus sat 6pm
 T [X] read another book
 D [X] finish book by: tonight 11pm
-

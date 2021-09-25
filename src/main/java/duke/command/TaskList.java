@@ -1,13 +1,12 @@
 package duke.command;
 
 import duke.Duke;
-import duke.Ui;
-import duke.exceptions.*;
-import duke.task.Deadline;
-import duke.task.Event;
+import duke.exceptions.InvalidTaskNumberException;
+import duke.ui.Ui;
+import duke.exceptions.DukeException;
+import duke.exceptions.InvalidCommandException;
 import duke.task.Task;
-import duke.Storage;
-import duke.task.ToDo;
+import duke.storage.Storage;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -15,23 +14,34 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
+/**
+ * Represents the Duke task manager where it includes the methods to execute
+ * the user's command while also including add, delete and listing of tasks.
+ */
 public class TaskList {
 
-    public ArrayList<Task> tasks = new ArrayList<>();
+    public static ArrayList<Task> tasks = new ArrayList<>();
+    public static ArrayList<Task> matches = new ArrayList<>();
     protected static int taskCount = 0;
     protected static String[] description;
     protected static String[] separate;
-    public static boolean isPlural = false;
-    public static final String LIST = "list";
-    public static final String EXIT = "bye";
-    public static final String TODO = "todo";
-    public static final String DEADLINE = "deadline";
-    public static final String EVENT = "event";
-    public static final String DONE = "done";
-    public static final String DELETE = "delete";
+    private static boolean isPlural = false;
+    private static final String LIST = "list";
+    private static final String EXIT = "bye";
+    private static final String TODO = "todo";
+    private static final String DEADLINE = "deadline";
+    private static final String EVENT = "event";
+    private static final String DONE = "done";
+    private static final String DELETE = "delete";
+    private static final String FIND = "find";
     public static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
 
-    public void addTask(Task newTask) {
+    /**
+     * Performs the adding of task to the task list based on its task type.
+     *
+     * @param newTask The task of class {@code Task} which is to be added onto the task list
+     */
+    public static void addTask(Task newTask) {
         tasks.add(newTask);
         Storage.saveToFile(Duke.file);
         taskCount = tasks.size();
@@ -43,6 +53,7 @@ public class TaskList {
         Ui.printLineBottom();
     }
 
+    /** Lists the tasks to the user on the terminal when user inputs {@code list}. */
     public void listTasks() {
         Ui.printLineTop();
         Ui.taskListHeader();
@@ -57,7 +68,12 @@ public class TaskList {
         Ui.printLineBottom();
     }
 
-    public void deleteTask(int taskNumber) {
+    /**
+     * Performs the removing of the specified task from the task list.
+     *
+     * @param taskNumber The task ID of the task which is to be removed from the task list
+     */
+    public static void deleteTask(int taskNumber) {
         taskCount = tasks.size() - 1;
         isPlural = tasks.size() != 2;
         System.out.println(" " + tasks.get(taskNumber).printDelete() + "\nNow you have "
@@ -68,17 +84,51 @@ public class TaskList {
         Storage.saveToFile(Duke.file);
     }
 
+    /**
+     * Checks if the format of the date and time is correct when
+     * user adds tasks of type {@code Deadline} and {@code Event}.
+     *
+     * @param dateTime The string which the user inputs under the parameter of
+     *                 timing for tasks of type {@code Deadline} and {@code Event}
+     * @return True when the format of the user timing input is correct and false when it's wrong
+     */
     public static boolean isValidDateTime(String dateTime) {
         try {
-            LocalDateTime.parse(dateTime,formatter);
+            LocalDateTime.parse(dateTime, formatter);
         } catch (DateTimeParseException e) {
             return false;
         }
         return true;
     }
 
-    public void executeCommand(String getUserInput, String userCommand) throws DukeException, IOException {
-        int taskNumber;
+    /**
+     * Gets the tasks which matches the user's query when user inputs {@code find}.
+     *
+     * @param query The string which user inputs to be found from the list of tasks on Duke
+     * @param list The array list of tasks found oen Duke
+     */
+    public static void getMatches(String query, ArrayList<Task> list) {
+        matches.clear();
+        for(Task task: list) {
+            if (task.description.contains(query)) {
+                matches.add(task);
+            }
+        }
+    }
+
+    /**
+     * Executes the specific commands on the task list on duke.
+     *
+     * @param getUserInput The input given by the user to carry out on tasks list
+     * @param userCommand The specific user command to carry out on the tasks list on duke
+     * @throws DukeException The custom exceptions for specific errors
+     * @throws IOException Signals that an I/O exception of some sort has occurred
+     * @throws InvalidTaskNumberException 1. If the task ID is larger or lower than the
+     * range of the size of the task list. 2. If the task ID is missing from the user input
+     */
+    public void executeCommand(String getUserInput, String userCommand)
+            throws DukeException, IOException, InvalidTaskNumberException {
+        int taskNumber = 0;
         switch (userCommand) {
         case EXIT:
             Duke.hasUserExited = true;
@@ -87,73 +137,22 @@ public class TaskList {
             listTasks();
             break;
         case DONE:
-            description = getUserInput.split("done ");
-            if (description.length < 2 || Integer.parseInt(description[1]) == 0) {
-                throw new InvalidTaskNumberException();
-            }
-            taskNumber = Integer.parseInt(description[1]) - 1;
-            if (tasks.get(taskNumber) == null) {
-                throw new InvalidTaskNumberException();
-            }
-            if (tasks.get(taskNumber).getStatusIcon().equals("X")) {
-                Ui.markedAsDone();
-            } else {
-                tasks.get(taskNumber).markAsDone();
-                Storage.saveToFile(Duke.file);
-                System.out.println(tasks.get(taskNumber).printDone());
-            }
+            DoneCommand.executeUserCommand(getUserInput,taskNumber);
             break;
         case TODO:
-            description = getUserInput.split("todo ");
-            if (description[1].trim().isEmpty()) {
-                throw new IndexOutOfBoundsException();
-            }
-            addTask(new ToDo(description[1]));
-
+             ToDoCommand.executeUserCommand(getUserInput);
             break;
         case DEADLINE:
-            int by = getUserInput.indexOf("/");
-            separate = getUserInput.split("/by");
-            description = separate[0].trim().split("deadline ");
-            if ((by == -1 && (description[1] != null))
-                    || (separate.length == 1)
-                    || (separate[1].trim().isEmpty())) {
-                throw new DeadlineTimingException();
-            }
-            if (!isValidDateTime(separate[1].trim())) {
-                throw new DateTimeFormatException();
-            } else {
-                LocalDateTime dueDate = LocalDateTime.parse(separate[1].trim(), formatter);
-                addTask(new Deadline(description[1], dueDate));
-            }
+            DeadLineCommand.executeUserCommand(getUserInput);
             break;
         case EVENT:
-            int at = getUserInput.indexOf("/");
-            separate = getUserInput.split("/at");
-            description = separate[0].trim().split("event ");
-            if ((at == -1 && (description[1] != null))
-                    || (separate.length == 1)
-                    || (separate[1].trim().isEmpty())) {
-                throw new EventTimingException();
-            }
-            if (!isValidDateTime(separate[1].trim())) {
-                throw new DateTimeFormatException();
-            } else {
-                LocalDateTime eventTiming = LocalDateTime.parse(separate[1].trim(), formatter);
-                addTask(new Event(description[1], eventTiming));
-            }
+            EventCommand.executeUserCommand(getUserInput);
             break;
         case DELETE:
-            description = getUserInput.split(" ");
-            if (description.length < 2 || Integer.parseInt(description[1]) == 0) {
-                throw new InvalidTaskNumberException();
-            }
-            taskNumber = Integer.parseInt(description[1]) - 1;
-            if (tasks.get(taskNumber) == null) {
-                throw new InvalidTaskNumberException();
-            } else {
-                deleteTask(taskNumber);
-            }
+            DeleteCommand.executeUserCommand(getUserInput,taskNumber);
+            break;
+        case FIND:
+            FindCommand.executeUserCommand(getUserInput);
             break;
         default:
             throw new InvalidCommandException();
