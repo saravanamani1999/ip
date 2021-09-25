@@ -43,17 +43,10 @@ ____________________________________________________________
 | `delete`   	| Deletes a specified task from the task list  	        | `delete TASK_INDEX`                         	|
 | `bye`      	| Exit Duke                                    	        | `bye`                                       	|
 
-### Notes about Commands:
+### Notes about Command Format:
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.
 * If a command expects parameters, then the user has to key it in the correct order and only once.
 * If a command (`list` and `bye`) does not expect any parameters, it will be ignored.
-* Tasks are displayed in the following format:
-   * [TASK_TYPE] [STATUS_ICON] TASK_DESCRIPTION (DATE_TIME)
-     * TASK_TYPE is `T`, `D`, or `E` which represents `todo`, `deadline` and `event` respectively.
-     * STATUS_ICON is `X` if it is marked as done or empty if it is not.
-     * TASK_DESCRIPTION is the description of the task when it gets added.
-     * DATE_TIME (only applicable to deadline and event) must have the following format:`dd-mm-yyyy HH:mm` 
-     where time is in 24-hour format.
 
 ## Features and Usage of Commands
 
