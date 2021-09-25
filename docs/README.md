@@ -66,6 +66,7 @@ Examples:
 Expected Outcome:
 ```
 todo read a book
+
 ____________________________________________________________
  Got it. I've added this task:
   [T][ ] read a book
