@@ -45,7 +45,7 @@ public class Ui {
     }
 
     /** Prints an error message when Duke catches any IO exceptions. */
-    public static void ioExceptionMessage() {
+    public static void sendIOExceptionMessage() {
         System.out.println(HORIZONTAL_LINE_TOP
                 + "\n ☹ OOPS!!! Something went wrong!." + "\n"
                 + HORIZONTAL_LINE_BOTTOM);
@@ -54,25 +54,25 @@ public class Ui {
     /**
      * Prints error message when the description of the task in the user input is missing
      *
-     * @param command The user's command word in the string
+     * @param command The user's command word in the string.
      */
-    public void indexOutOfBoundsMessage(String command) {
+    public void sendIndexOutOfBoundsMessage(String command) {
         System.out.println(HORIZONTAL_LINE_TOP
                 + "\n ☹ OOPS!!! The description of a " + command + " cannot be empty.\n"
                 + HORIZONTAL_LINE_BOTTOM);
     }
 
     /** Prints error message when the text file saving the tasks is not found in specified file path. */
-    public void fileNotFoundMessage() {
+    public void sendFileNotFoundMessage() {
         System.out.print(" File not found\n" + HORIZONTAL_LINE_BOTTOM);
     }
 
     /**
      * Prints the number of tasks found in the task list.
      *
-     * @param tasks Array list of the tasks updated onto Duke when launched
+     * @param tasks Array list of the tasks updated onto Duke when launched.
      */
-    public void tasksQuantity(ArrayList<Task> tasks) {
+    public void printTasksQuantity(ArrayList<Task> tasks) {
         if (tasks.size() == 0) {
             System.out.println(" No tasks found in the task file\n" + HORIZONTAL_LINE_BOTTOM);
         } else {
@@ -82,23 +82,23 @@ public class Ui {
     }
 
     /** Prints the message of acknowledgement when the task is marked as done. */
-    public static void markedAsDone() {
+    public static void printMarkedAsDone() {
         System.out.println(HORIZONTAL_LINE_TOP + "\n I've already marked the task as done!\n"
                 + HORIZONTAL_LINE_BOTTOM);
     }
 
     /** Prints the message to user when there are no tasks in the text file or duke task list. */
-    public static void noTasks() {
+    public static void sendNoTasksMessage() {
         System.out.println(" You have no tasks!");
     }
 
     /** Prints the header part of the acknowledgement message when user inputs {@code list}. */
-    public static void taskListHeader() {
+    public static void printTaskHeader() {
         System.out.println(" Here are the tasks in your list:");
     }
 
     /** Prints the header part of the acknowledgement message when user inputs {@code find}. */
-    public static void matchesListHeader() {
+    public static void printMatchesHeader() {
         System.out.println(" Here are the matching tasks in your list:");
     }
 
@@ -106,7 +106,7 @@ public class Ui {
      * Prints the message when there are no tasks found which matches the
      * query of the user when the user inputs {@code find}.
      */
-    public static void noMatchesMessage() {
+    public static void sendNoMatchesMessage() {
         System.out.println("\n ☹ There are no matching tasks found!");
     }
 

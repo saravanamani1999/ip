@@ -13,7 +13,7 @@ public class Deadline extends Task {
      * Constructs a {@code Deadline} task with the basic information of
      * its description and the deadline time of the task.
      *
-     * @param description Description of the task found in the task list
+     * @param description Description of the task found in the task list.
      */
     public Deadline(String description, LocalDateTime by) {
         super(description);
@@ -45,7 +45,7 @@ public class Deadline extends Task {
                 + getStatusIcon() + "] " + description + " (by: " + by + ")";
     }
 
-    public String fileContent() {
+    public String getFileContent() {
         return "D [" + getStatusIcon() + "] " + description + " by: " + dueTime;
     }
 

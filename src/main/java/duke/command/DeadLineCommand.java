@@ -12,23 +12,23 @@ public class DeadLineCommand extends TaskList {
     /**
      * Executes the command {@code deadline} on the task list and adds deadline tasks to task list.
      *
-     * @param getUserInput The input given by the user to carry out on tasks list
-     * @throws DeadlineTimingException If the parameter of timing for deadline is missing
-     * @throws DateTimeFormatException If the deadline timing does not meet the format: "dd-MM-yyyy HH:mm"
+     * @param userInput The input given by the user to carry out on tasks list.
+     * @throws DeadlineTimingException If the parameter of timing for deadline is missing.
+     * @throws DateTimeFormatException If the deadline timing does not meet the format: "dd-MM-yyyy HH:mm".
      */
-    public static void executeUserCommand(String getUserInput)
+    public static void executeUserCommand(String userInput)
             throws DeadlineTimingException, DateTimeFormatException {
-        int by = getUserInput.indexOf("/");
-        separate = getUserInput.split("/by");
-        description = separate[0].trim().split("deadline ");
+        int by = userInput.indexOf("/");
+        parameter = userInput.split("/by");
+        description = parameter[0].trim().split("deadline ");
         if ((by == -1 && (description[1] != null))
-                || (separate.length == 1)
-                || (separate[1].trim().isEmpty())) {
+                || (parameter.length == 1)
+                || (parameter[1].trim().isEmpty())) {
             throw new DeadlineTimingException();
-        } else if (!isValidDateTime(separate[1].trim())) {
+        } else if (!isValidDateTime(parameter[1].trim())) {
             throw new DateTimeFormatException();
         } else {
-            LocalDateTime dueDate = LocalDateTime.parse(separate[1].trim(), formatter);
+            LocalDateTime dueDate = LocalDateTime.parse(parameter[1].trim(), formatter);
             addTask(new Deadline(description[1], dueDate));
         }
     }

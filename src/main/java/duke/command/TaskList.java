@@ -2,11 +2,11 @@ package main.java.duke.command;
 
 import main.java.duke.Duke;
 import main.java.duke.exceptions.InvalidTaskNumberException;
-import main.java.duke.ui.Ui;
 import main.java.duke.exceptions.DukeException;
 import main.java.duke.exceptions.InvalidCommandException;
 import main.java.duke.task.Task;
 import main.java.duke.storage.Storage;
+import main.java.duke.ui.Ui;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -24,7 +24,7 @@ public class TaskList {
     public static ArrayList<Task> matches = new ArrayList<>();
     protected static int taskCount = 0;
     protected static String[] description;
-    protected static String[] separate;
+    protected static String[] parameter;
     private static boolean isPlural = false;
     private static final String LIST = "list";
     private static final String EXIT = "bye";
@@ -56,9 +56,9 @@ public class TaskList {
     /** Lists the tasks to the user on the terminal when user inputs {@code list}. */
     public void listTasks() {
         Ui.printLineTop();
-        Ui.taskListHeader();
+        Ui.printTaskHeader();
         if(tasks.size() == 0) {
-            Ui.noTasks();
+            Ui.sendNoTasksMessage();
         }
         int taskNumber;
         for (int i = 0; i < tasks.size(); i++) {
@@ -120,14 +120,14 @@ public class TaskList {
     /**
      * Executes the specific commands on the task list on duke.
      *
-     * @param getUserInput The input given by the user to carry out on tasks list
+     * @param userInput The input given by the user to carry out on tasks list
      * @param userCommand The specific user command to carry out on the tasks list on duke
      * @throws DukeException The custom exceptions for specific errors
      * @throws IOException Signals that an I/O exception of some sort has occurred
      * @throws InvalidTaskNumberException 1. If the task ID is larger or lower than the
      * range of the size of the task list. 2. If the task ID is missing from the user input
      */
-    public void executeCommand(String getUserInput, String userCommand)
+    public void executeCommand(String userInput, String userCommand)
             throws DukeException, IOException, InvalidTaskNumberException {
         int taskNumber = 0;
         switch (userCommand) {
@@ -138,22 +138,22 @@ public class TaskList {
             listTasks();
             break;
         case DONE:
-            DoneCommand.executeUserCommand(getUserInput,taskNumber);
+            DoneCommand.executeUserCommand(userInput, taskNumber);
             break;
         case TODO:
-             ToDoCommand.executeUserCommand(getUserInput);
+             ToDoCommand.executeUserCommand(userInput);
             break;
         case DEADLINE:
-            DeadLineCommand.executeUserCommand(getUserInput);
+            DeadLineCommand.executeUserCommand(userInput);
             break;
         case EVENT:
-            EventCommand.executeUserCommand(getUserInput);
+            EventCommand.executeUserCommand(userInput);
             break;
         case DELETE:
-            DeleteCommand.executeUserCommand(getUserInput,taskNumber);
+            DeleteCommand.executeUserCommand(userInput, taskNumber);
             break;
         case FIND:
-            FindCommand.executeUserCommand(getUserInput);
+            FindCommand.executeUserCommand(userInput);
             break;
         default:
             throw new InvalidCommandException();

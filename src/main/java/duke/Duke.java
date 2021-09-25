@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/** Wrapper class which integrates all the classes and methods to run Duke. */
+/** Integrates all the classes and methods to run Duke. */
 public class Duke {
     public static boolean hasUserExited = false;
     public static ArrayList<Task> tasks = new ArrayList<>();
@@ -35,13 +35,13 @@ public class Duke {
         try {
             storage.readFile(file, TaskList.tasks);
         } catch (FileNotFoundException e) {
-            ui.fileNotFoundMessage();
+            ui.sendFileNotFoundMessage();
         }
-        ui.tasksQuantity(TaskList.tasks);
+        ui.printTasksQuantity(TaskList.tasks);
     }
 
     /**
-     * Method to run the full flow of Duke starting with the welcome message,
+     * Runs the full flow of Duke starting with the welcome message,
      * followed by running the execution of the user commands and sends the exit message
      * when the user inputs {@code bye}.
      */
@@ -57,7 +57,7 @@ public class Duke {
             } catch (DukeException e) {
                 e.sendErrorMessage();
             } catch (IOException e) {
-                Ui.ioExceptionMessage();
+                Ui.sendIOExceptionMessage();
             } catch (InvalidTaskNumberException e) {
                 InvalidTaskNumberException.sendErrorMessage();
             } catch (IndexOutOfBoundsException e) {
@@ -65,7 +65,7 @@ public class Duke {
                     InvalidTaskNumberException.sendErrorMessage();
                 }
                 else {
-                    ui.indexOutOfBoundsMessage(userCommand);
+                    ui.sendIndexOutOfBoundsMessage(userCommand);
                 }
             }
         }

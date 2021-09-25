@@ -11,7 +11,7 @@ public class Task {
      * Constructs a{@code Task} with details such as the description of
      * the task and the status of whether it is marked as done.
      *
-     * @param description Description of the task found in the task list
+     * @param description Description of the task found in the task list.
      */
     public Task(String description) {
         this.description = description;
@@ -21,7 +21,7 @@ public class Task {
     /**
      * Finds the status icon of a specified task, ie whether it's marked with "X" or not.
      *
-     * @return The status icon "X" or " "
+     * @return The status icon "X" or " ".
      */
     public String getStatusIcon() {
         return (isDone ? "X" : " ");
@@ -44,7 +44,7 @@ public class Task {
     /**
      * Checks the task type of the specified task and prints it to indicate the type of task.
      *
-     * @return The task type "T", "D" OR "E" of the task in its subclasses
+     * @return The task type "T", "D" or "E" of the task in its subclasses.
      */
     public String getTaskType() {
         return " ";
@@ -53,7 +53,7 @@ public class Task {
     /**
      * Prints the details of the tasks in the task list.
      *
-     * @return The full details of the task with the task type, status icon and description of task
+     * @return The full details of the task with the task type, status icon and description of task.
      */
     public String printTask() {
         return "." + "[" + getTaskType() + "]" + "["
@@ -63,7 +63,7 @@ public class Task {
     /**
      * Prints the acknowledgment after adding a task to the task list.
      *
-     * @return The acknowledgement of adding a task to Duke
+     * @return The acknowledgement of adding a task to Duke.
      */
     public String printOk() {
         return HORIZONTAL_LINE + " added: " + description + HORIZONTAL_LINE;
@@ -72,7 +72,7 @@ public class Task {
     /**
      * Prints the header of the acknowledgement message from Duke after adding a task.
      *
-     * @return The starting of the message of the acknowledgment message
+     * @return The starting of the message of the acknowledgment message.
      */
     public String printOkStart() {
         return HORIZONTAL_LINE + " Got it. I've added this task:\n";
@@ -81,7 +81,7 @@ public class Task {
     /**
      * Prints the footer of the acknowledgement message from Duke after adding a task.
      *
-     * @return The ending part of the message of the acknowledgment message
+     * @return The ending part of the message of the acknowledgment message.
      */
     public String printOkEnd() {
         return " Now you have ";
@@ -90,7 +90,7 @@ public class Task {
     /**
      * Prints the acknowledgment after marking a task as done.
      *
-     * @return The acknowledgement of marking the specified task as done
+     * @return The acknowledgement of marking the specified task as done.
      */
     public String printDone() {
         return HORIZONTAL_LINE + " Nice! I've marked this task as done:\n   [" + getTaskType() + "]["
@@ -100,7 +100,7 @@ public class Task {
     /**
      * Prints the acknowledgment after removing a task from the task list.
      *
-     * @return The acknowledgement of removing a task from Duke
+     * @return The acknowledgement of removing a task from Duke.
      */
     public String printDelete() {
         return HORIZONTAL_LINE + " Noted. I've removed this task:\n   [" + getTaskType() + "]["
@@ -111,9 +111,9 @@ public class Task {
      * Reformats the code to match the format which is to be
      * added onto the text file which saves the tasks.
      *
-     * @return The details of the task which needs to be saved onto the text file
+     * @return The details of the task which needs to be saved onto the text file.
      */
-    public String fileContent() {
+    public String getFileContent() {
         return " [" + getStatusIcon() + "] " + description;
     }
 

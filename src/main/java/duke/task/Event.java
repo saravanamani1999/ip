@@ -13,7 +13,7 @@ public class Event extends Task {
      * Constructs a {@code Event} task with the basic information of
      * its description and the event timing of the task.
      *
-     * @param description Description of the task found in the task list
+     * @param description Description of the task found in the task list.
      */
     public Event(String description, LocalDateTime at) {
         super(description);
@@ -45,7 +45,7 @@ public class Event extends Task {
                 + getStatusIcon() + "] " + description + " (at: " + at + ")";
     }
 
-    public String fileContent() {
+    public String getFileContent() {
         return "E [" + getStatusIcon() + "] " + description + " at: " + dueTime;
     }
 

@@ -2,7 +2,7 @@ package main.java.duke.exceptions;
 
 import main.java.duke.ui.Ui;
 
-/** Custom exception to catch formatting errors in regard to the deadline and event timings. */
+/** Custom exception to catch errors in regard to formatting of the deadline and event timings. */
 public class DateTimeFormatException extends DukeException {
 
     @Override

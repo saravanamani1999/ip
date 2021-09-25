@@ -6,7 +6,7 @@ public class ToDo extends Task {
     /**
      * Constructs a {@code ToDo} task with the basic information of its description.
      *
-     * @param description Description of the task found in the task list
+     * @param description Description of the task found in the task list.
      */
     public ToDo(String description) {
         super(description);
@@ -26,7 +26,7 @@ public class ToDo extends Task {
                 + getStatusIcon() + "] " + description + HORIZONTAL_LINE;
     }
 
-    public String fileContent() {
+    public String getFileContent() {
         return "T [" + getStatusIcon() + "] " + description;
     }
 

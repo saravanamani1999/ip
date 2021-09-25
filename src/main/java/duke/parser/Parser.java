@@ -1,7 +1,5 @@
 package main.java.duke.parser;
 
-import java.util.Locale;
-
 /** Parses the given user command to make sense of it by getting the key user command. */
 public class Parser {
 
@@ -10,13 +8,13 @@ public class Parser {
      * the command word which needs to be executed. The command words
      * are "list","bye","delete","done","deadline","event","find" and "todo".
      *
-     * @param fullCommand Full string of user input provided in CLI
-     * @return The command word that needs to be executed
+     * @param fullCommand Full string of user input provided in CLI.
+     * @return The command word that needs to be executed.
      */
     public static String getCommandWord(String fullCommand) {
-        String[] separate;
-        separate = fullCommand.split(" ");
-        return separate[0];
+        String[] parameter;
+        parameter = fullCommand.split(" ");
+        return parameter[0];
     }
 
 }
