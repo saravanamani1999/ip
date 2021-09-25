@@ -1,20 +1,29 @@
-package duke;
+package duke.command;
 
-import duke.command.TaskList;
 import duke.exceptions.DukeException;
+<<<<<<< HEAD
 import duke.exceptions.InvalidTaskNumberException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.ui.Ui;
+=======
+import duke.task.Task;
+>>>>>>> master
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-
-    public static boolean hasUserExited = false;
+    public static final String HORIZONTAL_LINE_TOP = "\n______________________________" +
+            "______________________________\n";
+    public static final String HORIZONTAL_LINE_BOTTOM = "_______________________________" +
+            "_____________________________\n";
+    private static boolean hasUserExited = false;
+    public static ArrayList<Task> tasks = new ArrayList<>();
     public static String file = "data/duke.txt";
     private static TaskList taskList;
     private static Ui ui;

@@ -18,14 +18,25 @@ public class Task {
         this.isDone = false;
     }
 
+    /**
+     * Finds the status icon of a specified task, ie whether it's marked with "X" or not.
+     *
+     * @return The status icon "X" or " "
+     */
     public String getStatusIcon() {
         return (isDone ? "X" : " ");
     }
 
+    /** Sets the status icon of a task to "X". */
     public void markAsDone() {
         this.isDone = true;
     }
-    
+
+    /**
+     * Checks if a task is marked as done.
+     *
+     * @return True if task is marked as done, false if it is not.
+     */
     public boolean isDone() {
         return isDone;
     }

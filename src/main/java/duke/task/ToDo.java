@@ -22,8 +22,8 @@ public class ToDo extends Task {
     }
 
     public String printDone() {
-        return HORIZONTAL_LINE + " Nice! I've marked this task as done:\n   [" + getTaskType() + "]["
-                + getStatusIcon() + "] " + description + HORIZONTAL_LINE;
+        return horizontalLine + " Nice! I've marked this task as done:\n   [" + getTaskType() + "]["
+                + getStatusIcon() + "] " + description + horizontalLine;
     }
 
     public String fileContent() {
