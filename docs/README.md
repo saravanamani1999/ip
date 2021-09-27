@@ -297,7 +297,7 @@ This means the users can recover their tasks even after relaunching `Duke`.
 
 ### Warning: Editing `duke.txt`
 
-> :warning: It's highly advisable that beginner users do not edit any part of this file as if the data is not stored in the 
+> ❗ It's highly advisable that beginner users do not edit any part of this file as if the data is not stored in the 
 required format it might cause `Duke` to crash.
 
 
