@@ -16,12 +16,12 @@ to help users manage their tasks on the Command Line Interface (CLI).
   * [`delete`](#deleting-a-task-delete)
   * [`bye`](#exiting-duke-bye)
 * [Data Storage](#data-storage-in-duketxt)
-  * [Editing storage file](#editing-duketxt)
+  * [Warning: Editing storage file](#editing-duketxt)
 
 ## Quick Start
 
 1. Ensure you have Java 11 installed in your computer.
-1. Download the latest version of `Duke` [here!](https://github.com/saravanamani1999/ip/releases/tag/A-Jar)
+1. Download the latest version of `Duke` [here!](https://github.com/saravanamani1999/ip/releases/tag/A-Release)
 1. Copy the `ip.jar` to an empty folder
 1. On command line, navigate to the folder where `Duke` is stored
 1. Launch the `ip.jar` folder by running `java -jar ip.jar`
@@ -295,7 +295,7 @@ ____________________________________________________________
 Duke automatically saves all the tasks to a text file after each command which modifies the task list.
 This means the users can recover their tasks even after relaunching `Duke`.
 
-### Editing `duke.txt`
+### Warning: Editing `duke.txt`
 
 > :warning: It's highly advisable that beginner users do not edit any part of this file as if the data is not stored in the 
 required format it might cause `Duke` to crash.
